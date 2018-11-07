@@ -1,0 +1,30 @@
+
+
+@import './particles/variable';
+@import './particles/mixins';
+@import './particles/reset'; 
+
+
+
+
+
+
+
+
+
+#app {
+    height:667px;
+   .app-footer {
+       position: fixed;
+       bottom:0;
+        background:white;
+        border-top: 1px solid #e6e6e6;
+       
+    }
+    
+     main{
+    //     flex-grow: 1; flex-shrink: 1;
+        overflow: auto;
+     }
+}
+
