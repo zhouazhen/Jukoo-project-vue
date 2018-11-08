@@ -35,17 +35,6 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow,
-        
-        redirect: {name: 'showsLibrary'},
-        children: [
-            {
-                path: 'showsLibrary',
-                name: 'showsLibrary',
-                components: {
-                    all: AllItemList
-                }
-            }
-        ]
     },
     {
         path: '/not-found',

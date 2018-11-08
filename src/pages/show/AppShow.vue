@@ -1,18 +1,22 @@
 <template>
     <div id="show">
         <show-header></show-header>
-    
+        <div class="content">
+            <show-content></show-content>
+        </div>
+      
     </div>
 </template>
 <script>
 
 import showHeader from './ShowHeader.vue'
-
+import showContent from  './AllItemList.vue'
 
 export default {
-    props: ['url'],
+    name: 'show',
     components: {
         showHeader,
+        showContent
     }
 
 }

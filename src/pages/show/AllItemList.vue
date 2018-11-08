@@ -10,8 +10,6 @@
 import ajax from '../../util/axios'
 import ShowItems from '@c/common/app-show/show-items.vue'
 export default {
-    // props: ['type'],
-
     components: {
         ShowItems
     },
@@ -24,37 +22,44 @@ export default {
         }
     },
     watch: {
-        // type: {
-        //     immediate: true,
-        //     handler () {
-        //         this.shows = [] // 清空当前的数据
-        //         // this.hasMore = true // 重新更多
-        //         this.page = 1 // 重置页数
-        //         this.getShows()
-        //     }
-        // }
- 
+    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+      
+        '$route': { 
+            immediate: true,
+            handler () {
+                this.shows = [] // 清空当前的数据
+                // this.hasMore = true // 重新更多
+                this.page = 1 // 重置页数
+                this.getShows()
+            }
+        }
     },
    
     methods: {
         async getShows () {
-            
+            // 取到路由带过来的参数 
+        let routerParams = this.$route.query.category
+        // 将数据放在当前组件的数据内
+        this.category = routerParams
+        console.log(this.category)
             let result = await ajax({
                 url: '/ju/Show/getShowList',
+                method:'post',
                 data: {
                     city_id: -1,
-                    category: 0,
+                    category: JSON.parse(this.category),
                     keywords: "",
                     activity_id: 0,
                     sort_type: 0,
                     page: 1
                 }
+                
             })
         
             this.shows = this.shows.concat(result.data.data.list)
             
         }
-    }
+    },
 
 
 }
