@@ -10,6 +10,8 @@ import AppMine from '@pages/mine/AppMine'
 import AppShow from '@pages/show/AppShow'
 import AppDetail from '@pages/detail/AppDetail'
 import AppNotFound from '@pages/not-found/AppNotFound'
+import AllItemList from '@pages/show/AllItemList'
+import OtherItemList from '@pages/show/OtherItemList'
 
 // 路由表
 const routes = [
@@ -33,7 +35,24 @@ const routes = [
     {
         path: '/show',
         name: 'show',
-        component: AppShow
+        component: AppShow,
+        redirect: {name: 'all'},
+        children: [
+            {
+                path: 'all',
+                name: 'all',
+                components: {
+                    all: AllItemList
+                }
+            },
+            {
+                path: 'other',
+                name: 'other',
+                components: {
+                    other: OtherItemList
+                }
+            }
+        ]
     },
     {
         path: '/detail',
@@ -64,3 +83,5 @@ const router = new VueRouter({
 
 
 export default router
+
+

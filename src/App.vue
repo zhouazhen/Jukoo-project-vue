@@ -1,10 +1,13 @@
 <template>
   <div id="app">
    
-
-    <div>
+    <body>
+    
       <router-view></router-view>
-    </div>
+    </body>
+      
+    
+     <app-footer></app-footer>
   </div>
 </template>
 

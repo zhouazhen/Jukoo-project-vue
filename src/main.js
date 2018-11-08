@@ -12,7 +12,7 @@ import '@libs/flexible'
 //font-awesome字体图标
 import '@libs/font-awesome/css/font-awesome.min.css'
 // 引入各种插件： swiper...
-//import '@libs'
+import '@libs'
 
 // router 路由
 import router from './router'
