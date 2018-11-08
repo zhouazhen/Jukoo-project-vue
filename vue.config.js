@@ -11,10 +11,10 @@ module.exports = {
       port: 8000,
       proxy: {
         '/ju': {
-          target: 'https://m.juooo.com/',
+          target: 'https://m.juooo.com',
           changeOrigin: true,
           pathRewrite: {
-            '^/': ''
+            '^/ju': '/'
           }
         }
       }
