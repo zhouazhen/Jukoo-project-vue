@@ -1,22 +1,20 @@
 <template>
     <div id="show">
         <show-header></show-header>
-       
-        <section class="content">
-            <router-view name= 'all'></router-view> 
-            <router-view name= 'other'></router-view> 
-        </section>
-           
+    
     </div>
 </template>
 <script>
 
 import showHeader from './ShowHeader.vue'
+
+
 export default {
-    name: 'show',
+    props: ['url'],
     components: {
-      showHeader
+        showHeader,
     }
+
 }
 </script>
 <style lang="scss">

@@ -13,7 +13,8 @@ const ajax = (options) => {
     
     // let _react = options.react === undefined ? true : options.react
     
-    // options.params = options.params || {}
+    options.params = options.params || {}
+    
     
     // options.params.__t = Date.now()
     
