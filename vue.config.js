@@ -14,7 +14,8 @@ module.exports = {
           target: 'https://m.juooo.com',
           changeOrigin: true,
           pathRewrite: {
-            '^/ju': ''
+            '^/ju': '/'
+           
           }
         }
       }
