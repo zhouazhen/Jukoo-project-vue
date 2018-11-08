@@ -1,34 +1,27 @@
 <template>
   <div id="app">
    
-    
-    <body>
+
+    <div>
       <router-view></router-view>
-    </body>
-     <app-footer></app-footer>
+    </div>
   </div>
 </template>
 
 
 <script>
 
-import AppFooter from '@c/layout/AppFooter'
+
 
 export default {
    
     name: 'app',
     components: {
-     
-      AppFooter
     }
 }
 
 </script>
 
 <style lang="scss">
-
-// 
-
-
 
 </style>

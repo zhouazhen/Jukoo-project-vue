@@ -9,7 +9,8 @@ import '@styles/main.scss'
 
 // flexible 移动端适配
 import '@libs/flexible'
-
+//font-awesome字体图标
+import '@libs/font-awesome/css/font-awesome.min.css'
 // 引入各种插件： swiper...
 //import '@libs'
 

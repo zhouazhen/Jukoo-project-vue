@@ -8,6 +8,7 @@ Vue.use(VueRouter)
 import AppHome from '@pages/home/AppHome'
 import AppMine from '@pages/mine/AppMine'
 import AppShow from '@pages/show/AppShow'
+import AppDetail from '@pages/detail/AppDetail'
 import AppNotFound from '@pages/not-found/AppNotFound'
 
 // 路由表
@@ -33,6 +34,11 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow
+    },
+    {
+        path: '/detail',
+        name: 'detail',
+        component: AppDetail
     },
     {
         path: '/not-found',
