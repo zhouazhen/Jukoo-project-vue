@@ -7,7 +7,6 @@
     </body>
       
     
-     <app-footer></app-footer>
   </div>
 </template>
 
@@ -20,8 +19,6 @@ export default {
    
     name: 'app',
     components: {
-     
-      AppFooter
     },
    
     
