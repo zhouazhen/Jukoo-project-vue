@@ -4,23 +4,24 @@
     <detail-shadowbg></detail-shadowbg>
     <div class="view">
       <article class="poster">
-        <img class="img-fg" src="http://image.juooo.com/group1/M00/02/14/rAoKNVtiwvKAarn7AAB2P6sw5rA772.jpg" alt="">
+        <img class="img-fg" :src="'http://image.juooo.com'+data.pic" alt="">
         <div class="poster-bg-shadow"></div>
         <img class="logo-i" src="https://m.juooo.com/public/basic/Home/app/app-juooo4.2/images/juooo.png" alt="">
         <a class="round-num" href="https://m.juooo.com/tour/tourshowinfo?sid=33506">11场巡演</a>
         <div class="poster-fg"></div>
       </article>
       <article class="text-desc">
-        <h3 class="title">【小橙堡】情绪管理亲子剧《我该怎么办》--天津站</h3>
-        <div class="row">时间：<span class="time">2018.11.03-2018.11.24</span></div>
+        <h3 class="title">{{data.schedular_name}}</h3>
+        <!-- <h3 class="title"></h3> -->
+        <div class="row">时间：<span class="time">{{data.activity_seckill_start_time|timeFormat}}-{{data.activity_seckill_end_time|timeFormat}}</span></div>
         <a href="" class="row venue">
           <span>场馆：</span>
-          <span class="place">天津华夏未来剧场</span>
+          <span class="place">{{data.venue_name}}</span>
           <i class="fa fa-map-marker"></i>
         </a>
         <div class="price row">
           <i class="fa fa-cny"></i>
-          <span class="num">88-298</span>
+          <span class="num">{{data.ticket_price}}</span>
         </div>
         <div class="support">
           <div class="left">
@@ -84,10 +85,21 @@ import DetailFooter from "@pages/detail/DetailFooter";
 import DetailShadowbg from "@pages/detail/DetailShadowbg";
 export default {
   name: "detail",
+  data() {
+    return {
+      data: JSON.parse(localStorage.getItem("item"))
+    };
+  },
   components: {
     DetailHeader,
     DetailFooter,
     DetailShadowbg
+  },
+  filters: {
+    timeFormat: function(time) {
+      let d = new Date(Number(time)*1000);
+      return d.getFullYear() + "." + d.getMonth() + "." + d.getDate();
+    }
   }
 };
 </script>
@@ -355,7 +367,7 @@ export default {
   .empty {
     width: 100%;
     height: 1.3333rem;
-}
+  }
 }
 .fl {
   float: left;

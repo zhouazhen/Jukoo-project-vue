@@ -57,7 +57,7 @@ const routes = [
     {
         path: '/detail',
         name: 'detail',
-        component: AppDetail
+        component: AppDetail,
     },
     {
         path: '/not-found',

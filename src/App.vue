@@ -7,7 +7,6 @@
     </body>
       
     
-     <app-footer></app-footer>
   </div>
 </template>
 
