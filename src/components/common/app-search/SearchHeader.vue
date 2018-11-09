@@ -2,13 +2,15 @@
     <header class="app-header">
         <div class="left">
             
-            <span class="map"><i class="fa fa-chevron-left"></i></span>
+            <router-link tag="span" to="/home" class="back"><i class="fa fa-chevron-left"></i></router-link>
         </div>
+        <div class="right1">
         <!-- <router-link tag="div" to="/search" class="right"> -->
            <a class="search" href="#"><i class="fa fa-search s"></i>演出/艺人/场馆</a>
-               <span>搜索</span>
+               <span class="title">搜索</span>
           
         <!-- </router-link> -->
+        </div>
     </header>
        
 </template>
@@ -26,10 +28,12 @@ export default {};
         color: #212121;
         position:fixed;
         top:0;
-        .left .map{
+        .left .back{
             
-            font-size:0.3733rem;
-            color:rgb(38, 38, 38);
+            font-size:0.4667rem;
+            color:
+rgb(153, 153, 153)
+;
             text-overflow: ellipsis;
             white-space: nowrap;
             font-family: Arial, "微软雅黑", sans-serif;
@@ -47,13 +51,13 @@ export default {};
 
            // line-height: 1.87733rem;
         }
-        .right{
+        .right1{
             width:7.4933rem;
             height:0.8rem;
             background-color:rgb(240, 240, 240);
             position:absolute;
             top:0.2rem;
-            right:30px;
+            right:1.3333rem;
             border-radius: 3%;
            .search{
                 font-size:0.4rem;
@@ -66,6 +70,13 @@ export default {};
                     margin-right:0.1333rem
                  }
 
+           }
+           .title{
+               color:rgb(102, 102, 102);
+               font-size:0.3733rem;
+               position:relative;
+               right:-7.75rem;
+               top:-0.18rem
            }
            
 
