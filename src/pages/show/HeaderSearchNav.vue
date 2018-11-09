@@ -1,7 +1,14 @@
 <template>
     <div class="search-nav">
         <ul>
-            <router-link :to = "{path:'/show', query: {category: item.category} }" tag = 'li' v-for= '(item,i) in types' :key="i" >{{item.title}}</router-link>
+            <router-link 
+            :to = "{path:'/show', query: {category: item.category} }" 
+            tag = 'li' 
+            v-for= '(item,i) in types' :key="i"
+            @click.native = "category = item.category"
+            :class = "{active: item.category === category}"
+            >
+            {{item.title}}</router-link>
              <!-- <li  @click = "sendQuerys" v-for= '(item,i) in types' :key="i" :category='item.category'>{{item.title}}</li> -->
         </ul>
          
@@ -13,6 +20,7 @@
 export default {
 
     data() {
+
         return {  
             types: [
             
@@ -27,6 +35,7 @@ export default {
                 {id: 9, title: '展览', category: 99}
 
             ],
+            category: this.$route.query.category || 0,
         }
 
     },

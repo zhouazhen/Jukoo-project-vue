@@ -9,8 +9,6 @@ import AppHome from '@pages/home/AppHome'
 import AppMine from '@pages/mine/AppMine'
 import AppShow from '@pages/show/AppShow'
 import AppNotFound from '@pages/not-found/AppNotFound'
-import AllItemList from '@pages/show/AllItemList'
-import OtherItemList from '@pages/show/OtherItemList'
 import AppSearch from '@pages/search/AppSearch'//搜索页
 
 // 路由表

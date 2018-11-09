@@ -71,9 +71,9 @@ export default {
     methods: {
         async getShows () {
             // 取到路由带过来的参数 
-        let routerParams = this.$route.query.category
+        let routerQruerys = this.$route.query.category
         // 将数据放在当前组件的数据内
-        this.category = routerParams
+        this.category = routerQruerys
       
         // if ( !this.hasMore ) return false;
             let result = await this.$http({
