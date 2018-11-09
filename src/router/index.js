@@ -35,6 +35,16 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow,
+        // redirect: {name:'showsLibrary'},
+        //     children: [
+        //         {
+        //             path: 'showsLibrary',
+        //             name: 'showsLibrary',
+        //             components: {
+        //                 showsLibrary: AppShow
+        //             }
+        //         }
+        //     ]
     },
     {
         path: '/not-found',

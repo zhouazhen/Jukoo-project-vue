@@ -11,7 +11,7 @@ import '@styles/main.scss'
 import '@libs/flexible'
 
 // 引入各种插件： swiper...
-//import '@libs'
+import '@libs'
 
 // router 路由
 import router from './router'

@@ -6,7 +6,7 @@
             :key="item.id"
             tag='div'
             :to = "item.path"
-           
+            
         >
          <div  class="app-footer_item"  >
            
@@ -24,7 +24,7 @@ export default {
              navs: [
                 { id: 1, title: '首页', img:'fa fa-home ', path: '/home' },
                 { id: 2, title: '演出库',img:'fa fa-modx ', path: '/show'},
-                { id: 3, title: '我的', img:'fa fa-heart',path: '/mine' }
+                { id: 3, title: '我的', img:'fa fa-heart',path: '/mine'}
             ]
         }
     }
