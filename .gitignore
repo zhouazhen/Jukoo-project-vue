@@ -1,33 +1,10 @@
-<<<<<<< HEAD
-.DS_Store
-node_modules
-/dist
-/outs
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-=======
 # Logs
 logs
 *.log
->>>>>>> 8831c1be67b8618c733e6d09d94d96a09428f032
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-<<<<<<< HEAD
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw*
-=======
 # Runtime data
 pids
 *.pid
@@ -82,4 +59,3 @@ typings/
 
 # next.js build output
 .next
->>>>>>> 8831c1be67b8618c733e6d09d94d96a09428f032
