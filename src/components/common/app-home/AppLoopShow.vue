@@ -5,7 +5,7 @@
             <swiper :options="swiperOption" class="swiper">
 
                 <!-- slides -->
-                <swiper-slide class="slide" v-for="item in data" :key="item.show_id" @click.native="toDetail(item)">
+                <swiper-slide class="slide c" v-for="item in data" :key="item.show_id" @click.native="toDetail(item)">
 
                     <img :src="item.pic">
 
@@ -70,15 +70,16 @@ export default {
       position: relative;
       right: -5.6rem;
     }
-  }
-  .app-loop-show-swiper {
-    height: 100%;
-    width: 9.6667rem;
-    .slide {
-      width: 3rem;
-      height: 3.9067rem;
-      display: flex;
-      margin-right: 0.1333rem;
+    .app-loop-show-swiper{
+        height:100%;
+         width:9.6667rem;
+        .c{
+            width:3rem;
+            height:3.9067rem;
+            display: flex;
+            margin-right:0.1333rem;
+            
+        }
     }
   }
 }

@@ -97,7 +97,7 @@ export default {
   },
   filters: {
     timeFormat: function(time) {
-      let d = new Date(Number(time)*1000);
+      let d = new Date(Number(time) * 1000);
       return d.getFullYear() + "." + d.getMonth() + "." + d.getDate();
     }
   }
@@ -247,8 +247,6 @@ export default {
           width: 6.9333rem;
           height: 0.6133rem;
           overflow: hidden;
-          .sup-item {
-          }
         }
         .right {
           float: right;

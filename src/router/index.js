@@ -12,6 +12,7 @@ import AppDetail from '@pages/detail/AppDetail'
 import AppNotFound from '@pages/not-found/AppNotFound'
 import AllItemList from '@pages/show/AllItemList'
 import OtherItemList from '@pages/show/OtherItemList'
+import AppSearch from '@pages/search/AppSearch'//搜索页
 
 // 路由表
 const routes = [
@@ -43,7 +44,8 @@ const routes = [
                 name: 'all',
                 components: {
                     all: AllItemList
-                }
+                },
+                
             },
             {
                 path: 'other',
@@ -60,10 +62,20 @@ const routes = [
         component: AppDetail,
     },
     {
+        path: '/search',
+        name: 'search',
+        component: AppSearch,
+        beforeEnter:  (to, from ,next) => {
+            console.log(to.path)
+        }
+
+    },
+    {
         path: '/not-found',
         name: 'not-found',
         component: AppNotFound
     },
+    
     {
         path: '**',
         redirect: '/not-found'

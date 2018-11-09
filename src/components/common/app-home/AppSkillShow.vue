@@ -5,7 +5,7 @@
             <swiper :options="swiperOption" class="swiper">
 
                 <!-- slides -->
-                <swiper-slide class="slide" v-for="item in data" :key="item.ticket_id" @click.native="toDetail(item)">
+                <swiper-slide class="slide s" v-for="item in data" :key="item.ticket_id" @click.native="toDetail(item)">
                     <div class="left">
                         <img :src="url+item.pic">
                     </div>
@@ -83,7 +83,7 @@ export default {
   .app-skill-show-swiper {
     height: 100%;
     width: 9.3333rem;
-    .slide {
+    .s {
       width: 9.3333rem;
       height: 100%;
       display: flex;
