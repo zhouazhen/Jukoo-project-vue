@@ -15,6 +15,7 @@ module.exports = {
           changeOrigin: true,
           pathRewrite: {
             '^/ju': '/'
+           
           }
         }
       }

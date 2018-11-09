@@ -41,13 +41,13 @@ export default {
             
             margin:0.2rem 0;
             .fa{
-                font-size: 0.5811rem;
+                font-size:0.5733rem;
                 
                
             }
             p{
                 text-align: center;
-                font-size: 0.2973rem;
+                font-size: 0.2933rem;
                 color:#333
             }
         }

@@ -1,9 +1,11 @@
 <template>
   <div id="app">
    
+    <body>
     
-    
-      <router-view></router-view>
+      <router-view ></router-view>
+    </body>
+      
     
      <app-footer></app-footer>
   </div>
@@ -20,7 +22,10 @@ export default {
     components: {
      
       AppFooter
-    }
+    },
+   
+    
+    
 }
 
 </script>

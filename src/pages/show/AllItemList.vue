@@ -2,6 +2,7 @@
     <div class="all_items">
         <div class="items_wrap">
             <show-items v-for= '(item,i) in shows' :key="i" :info = 'item'></show-items>
+          
         </div>
     </div>
 </template>
@@ -48,7 +49,7 @@ export default {
                 
             })
         
-            this.shows = this.shows.concat(result.data.data.list)
+            this.shows = this.shows.concat(result.list)
             
     },
 
@@ -99,7 +100,7 @@ export default {
                 }  
             })
         
-            this.shows = this.shows.concat(result.data.data.list)
+            this.shows = this.shows.concat(result.list)
             
         }
     },

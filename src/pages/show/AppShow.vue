@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-
+import ajax from '../../util/axios'
 import showHeader from './ShowHeader.vue'
 import showContent from  './AllItemList.vue'
 

@@ -2,70 +2,37 @@
     <section class="app-home">
         <app-header></app-header>
         <main>
+            <app-home-swiper></app-home-swiper>
+             <app-nav></app-nav>
+             <app-skill-show></app-skill-show>
+              <app-loop-show></app-loop-show>
+               <app-hot-box></app-hot-box>
 
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-<p>home</p>
-            <p>home</p>
-            <p>home</p>
-            <p>home</p>
-
-
-            
-            home
-            home
+             
+          
         </main>
+       
     </section>
 </template>
 
 <script>
 import AppHeader from '@c/common/app-home/AppHeader'
+
+import AppHomeSwiper from '@c/common/app-home/AppHomeSwiper'
+import AppNav from '@c/common/app-home/AppNav'
+import AppSkillShow from '@c/common/app-home/AppSkillShow'
+import AppLoopShow from '@c/common/app-home/AppLoopShow'
+import AppHotBox from '@c/common/app-home/AppHotBox'
 export default {
    components: {
      
-      AppHeader
+      AppHeader,
+      AppHomeSwiper,
+      AppNav,
+      AppSkillShow,
+      AppLoopShow,
+      AppHotBox
+      
     }
 }
 </script>
