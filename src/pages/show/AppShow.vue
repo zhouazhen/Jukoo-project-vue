@@ -3,20 +3,27 @@
         <show-header></show-header>
        
         <section class="content">
-            <router-view name= 'all'></router-view> 
+            <router-view name= 'all' ></router-view> 
             <router-view name= 'other'></router-view> 
         </section>
            
     </div>
 </template>
 <script>
-
+import ajax from '../../util/axios'
 import showHeader from './ShowHeader.vue'
 export default {
     name: 'show',
     components: {
       showHeader
-    }
+    },
+     data () {
+        return {
+            shows : [],
+         
+        }
+    },
+    
 }
 </script>
 <style lang="scss">

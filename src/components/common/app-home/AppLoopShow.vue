@@ -6,7 +6,7 @@
 
                     <!-- slides -->
                     <swiper-slide 
-                    class="slide"
+                    class="slide c"
                     v-for = "item in data"
                     :key= "item.show_id"
                     >
@@ -79,7 +79,7 @@ right:-5.6rem
     .app-loop-show-swiper{
         height:100%;
          width:9.6667rem;
-        .slide{
+        .c{
             width:3rem;
             height:3.9067rem;
             display: flex;

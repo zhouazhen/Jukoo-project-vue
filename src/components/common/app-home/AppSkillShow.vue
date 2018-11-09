@@ -1,12 +1,12 @@
 <template>
     <div class="app-skill-show">
-            <h4>显示秒杀</h4>
+            <h4>限时秒杀</h4>
             <div class="app-skill-show-swiper">
                 <swiper  :options="swiperOption" class="swiper">
 
                     <!-- slides -->
                     <swiper-slide 
-                    class="slide"
+                    class="slide s"
                     v-for = "item in data"
                     :key= "item.ticket_id"
                     >
@@ -82,7 +82,7 @@ export default {
     .app-skill-show-swiper{
         height:100%;
         width:9.3333rem;
-        .slide{
+      .s{
             width:9.3333rem;
             height:100%;
             display: flex;

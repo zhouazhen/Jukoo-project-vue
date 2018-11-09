@@ -4,11 +4,11 @@
             
             <span class="map"><i class="fa fa-map-marker"></i>全国</span>
         </div>
-        <div class="right">
+        <router-link tag="div" to="/search" class="right">
            <a class="search" href="#"><i class="fa fa-search s"></i>搜索演出,艺人或场馆</a>
                
           
-        </div>
+        </router-link>
     </header>
        
 </template>

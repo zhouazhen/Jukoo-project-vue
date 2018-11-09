@@ -3,7 +3,7 @@
    
     <body>
     
-      <router-view></router-view>
+      <router-view ></router-view>
     </body>
       
     
@@ -20,7 +20,12 @@ export default {
    
     name: 'app',
     components: {
-    }
+     
+      AppFooter
+    },
+   
+    
+    
 }
 
 </script>

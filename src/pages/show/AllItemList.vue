@@ -2,6 +2,7 @@
     <div class="all_items">
         <div class="items_wrap">
             <show-items v-for= '(item,i) in shows' :key="i" :info = 'item'></show-items>
+          
         </div>
     </div>
 </template>
@@ -11,12 +12,14 @@ import ajax from '../../util/axios'
 import ShowItems from '@c/common/app-show/show-items.vue'
 export default {
     name: 'all',
+  
     components: {
         ShowItems
     },
     data () {
         return {
             shows : [],
+         
         }
     },
     async beforeCreate () {
@@ -34,10 +37,11 @@ export default {
         })
       
         this.shows = this.shows.concat(result.list)
+       
         
-    }
-
-
+    },
+     
+    
 }
 </script>
 
