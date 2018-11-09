@@ -1,29 +1,25 @@
 <template>
     <div id="show">
         <show-header></show-header>
-       
-        <section class="content">
-            <router-view name= 'all' ></router-view> 
-            <router-view name= 'other'></router-view> 
-        </section>
-           
+        <div class="content">
+            <show-content></show-content>
+        </div>
+      
     </div>
 </template>
 <script>
 import ajax from '../../util/axios'
 import showHeader from './ShowHeader.vue'
+import showContent from  './AllItemList.vue'
+
 export default {
     name: 'show',
     components: {
-      showHeader
+        showHeader,
+        showContent
     },
-     data () {
-        return {
-            shows : [],
-         
-        }
-    },
-    
+  
+
 }
 </script>
 <style lang="scss">

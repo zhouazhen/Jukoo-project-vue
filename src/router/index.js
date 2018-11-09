@@ -37,24 +37,16 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow,
-        redirect: {name: 'all'},
-        children: [
-            {
-                path: 'all',
-                name: 'all',
-                components: {
-                    all: AllItemList
-                },
-                
-            },
-            {
-                path: 'other',
-                name: 'other',
-                components: {
-                    other: OtherItemList
-                }
-            }
-        ]
+        // redirect: {name:'showsLibrary'},
+        //     children: [
+        //         {
+        //             path: 'showsLibrary',
+        //             name: 'showsLibrary',
+        //             components: {
+        //                 showsLibrary: AppShow
+        //             }
+        //         }
+        //     ]
     },
     {
         path: '/detail',
