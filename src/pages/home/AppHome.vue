@@ -6,6 +6,8 @@
              <app-nav></app-nav>
              <app-skill-show></app-skill-show>
               <app-loop-show></app-loop-show>
+               <app-hot-box></app-hot-box>
+
              
           
         </main>
@@ -20,6 +22,7 @@ import AppHomeSwiper from '@c/common/app-home/AppHomeSwiper'
 import AppNav from '@c/common/app-home/AppNav'
 import AppSkillShow from '@c/common/app-home/AppSkillShow'
 import AppLoopShow from '@c/common/app-home/AppLoopShow'
+import AppHotBox from '@c/common/app-home/AppHotBox'
 export default {
    components: {
      
@@ -27,7 +30,8 @@ export default {
       AppHomeSwiper,
       AppNav,
       AppSkillShow,
-      AppLoopShow
+      AppLoopShow,
+      AppHotBox
       
     }
 }

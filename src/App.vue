@@ -3,7 +3,7 @@
    
     <body>
     
-      <router-view></router-view>
+      <router-view ></router-view>
     </body>
       
     
@@ -22,7 +22,10 @@ export default {
     components: {
      
       AppFooter
-    }
+    },
+   
+    
+    
 }
 
 </script>
