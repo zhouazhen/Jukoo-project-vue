@@ -24,7 +24,13 @@ export default {
       AppFooter
     },
    
-    
+//     methods: {
+ 
+//      description(a){
+//        console.log(a)
+
+//      }
+//  },
     
 }
 

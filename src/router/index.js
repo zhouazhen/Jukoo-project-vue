@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import VueRouter from 'vue-router'
-// import bus from '@util/bus'
+ import bus from '@util/bus'
 
 Vue.use(VueRouter)
 
@@ -59,9 +59,10 @@ const routes = [
         path: '/search',
         name: 'search',
         component: AppSearch,
-        beforeEnter:  (to, from ,next) => {
-            console.log(to.path)
-        }
+        // beforeEnter:  (to, from ,next) => {
+        //     console.log(to.path)
+        //     // this.$emit('url',to.path);
+        // }
 
     },
     {
