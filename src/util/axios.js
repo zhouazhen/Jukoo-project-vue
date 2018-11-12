@@ -9,6 +9,7 @@ const ajax = (options) => {
             } else {
                 if (_react) console.log('数据获取失败')
             }
+            
             return res.data.data          
         })
         .catch(err => {

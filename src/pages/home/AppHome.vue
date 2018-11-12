@@ -11,7 +11,7 @@
              
           
         </main>
-       
+       <app-footer class="bottom"></app-footer>
     </section>
 </template>
 
@@ -23,6 +23,7 @@ import AppNav from '@c/common/app-home/AppNav'
 import AppSkillShow from '@c/common/app-home/AppSkillShow'
 import AppLoopShow from '@c/common/app-home/AppLoopShow'
 import AppHotBox from '@c/common/app-home/AppHotBox'
+import appFooter from '@c/layout/AppFooter.vue'
 export default {
    components: {
      
@@ -31,7 +32,8 @@ export default {
       AppNav,
       AppSkillShow,
       AppLoopShow,
-      AppHotBox
+      AppHotBox,
+      appFooter
       
     }
 }
