@@ -1,24 +1,92 @@
 <template>
-    <header class="app-header">
+<div>
+    <header class="search-header">
         <div class="left">
             
             <router-link tag="span" to="/home" class="back"><i class="fa fa-chevron-left"></i></router-link>
         </div>
         <div class="right1">
-        <!-- <router-link tag="div" to="/search" class="right"> -->
+        <router-link tag="div" to="/search" class="right">
            <a class="search" href="#"><i class="fa fa-search s"></i>演出/艺人/场馆</a>
                <span class="title">搜索</span>
           
-        <!-- </router-link> -->
+        </router-link>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         </div>
     </header>
-       
+    <div class = "key"> 
+        <p>大家都在找</p>
+        <div class="key-list">
+          <router-link 
+          
+            
+           tag="span"
+           :to="{path:'/show', query: {keyword: item.key}  }"
+            v-for= "item in data"
+             :key="item.id"
+            
+             >{{item.title}}
+             </router-link>
+        </div>
+    </div>
+    <div class="history">
+        <h6>最近搜索</h6>
+        <div><span>猫</span><i class="fa fa-times"></i></div>
+    </div>
+ </div>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+    data:function(){
+        return{
+            data:[
+                {id:1,title:"贝隆夫人",key:"贝隆夫人"},
+                {id:2,title:"《猫》",key:"《猫》"},
+                {id:3,title:"魔戒",key:"魔戒"},
+                {id:4,title:"小野丽莎",key:"小野丽莎"},
+                 {id:5,title:"V.K克",key:"V.K克"},
+                {id:6,title:"三体",key:"三体"},
+                {id:7,title:"周慧敏",key:"周慧敏"},
+                {id:8,title:"王力宏",key:"王力宏"},
+                 {id:9,title:"陈慧娴",key:"陈慧娴"},
+
+            ]
+        }
+    },
+
+      beforeCreate() {
+    var that = this;
+   
+    axios({
+      method: "post",
+      url: "/ju/Search/getKeywordsList",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+      
+    }).then(function(res) {
+      
+console.log(res)
+   
+     
+    });
+  },
+
+    methods:{
+     test:function(i){
+         // @click.native="test(item.id)"
+         console.log(i)
+          this.$bus.$emit("search",this.data[i-1].title)
+        
+
+        
+
+     }
+    }
+};
 </script>
 <style lang="scss" >
-    .app-header{
+    .search-header{
         backface-visibility: hidden;
         margin: 0;
         border-bottom: 1px solid #e7e7e7;
@@ -31,9 +99,7 @@ export default {};
         .left .back{
             
             font-size:0.4667rem;
-            color:
-rgb(153, 153, 153)
-;
+            color:rgb(153, 153, 153);
             text-overflow: ellipsis;
             white-space: nowrap;
             font-family: Arial, "微软雅黑", sans-serif;
@@ -81,5 +147,84 @@ rgb(153, 153, 153)
            
 
         }
+    
+
+
+}
+
+    .key{
+        position:relative;
+        top:1.3333rem;
+        p{
+            padding: 0.5333rem 0.4rem 0;
+            font-size:0.32rem;
+            line-height: 0.32rem;
+            color: #999999;
+        }
+    
+    .key-list{
+        display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.4rem 0.2667rem 0;
+    font-size: 0;
+        color: #666;
+        span{
+            height: 0.8rem;
+            line-height: 0.8rem;
+            margin: 0 0.1333rem 0.2667rem;
+            padding-left: 0.5067rem;
+            padding-right: 0.5067rem;
+            background-color: #f7f7f7;
+            border-radius: 0.0667rem;
+            font-size: 0.3467rem;
+            color: #212121;
+        }
+
     }
+    }
+    .history{
+        position:relative;
+        top:1rem;
+
+
+        h6{
+            padding: 0.5333rem 0.4rem 0;
+            font-size: 0.32rem;
+            line-height: 0.32rem;
+            color: #999999;
+
+        }   
+    div{
+            display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.3333rem;
+    line-height: 1.3333rem;
+    padding-left: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.3467rem;
+    color: #333333;
+    span{
+       color: rgb(51, 51, 51);
+       font-size:0.3467rem;
+       line-height:1.3333rem;
+
+    }
+    i{
+           
+    line-height: 1.3333rem;
+    font-size: 0.5rem;
+    font-weight: normal;
+    color: #c2c2c2;
+    text-align: center;
+    position:absolute;
+    right:0.1333rem
+    }
+    }
+    }
+     
 </style>
+
+
+ <router-link tag="div" :to="{path:'/show', query: {category: item.category} }" class = "app-nav-top-item"  v-for = "item in data" :key  = "item.id ">

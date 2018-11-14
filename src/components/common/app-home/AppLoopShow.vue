@@ -39,7 +39,7 @@ export default {
         "Content-Type": "application/x-www-form-urlencoded"
       }
     }).then(function(res) {
-      console.log(res.data.data);
+     
       that.data = res.data.data;
     });
   },
@@ -70,13 +70,14 @@ export default {
       position: relative;
       right: -5.6rem;
     }
-    .app-loop-show-swiper{
+    .swiper{
         height:100%;
          width:9.6667rem;
-        .c{
+
+        .slide{
             width:3rem;
             height:3.9067rem;
-            display: flex;
+            // display: flex;
             margin-right:0.1333rem;
             
         }

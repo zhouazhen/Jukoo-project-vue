@@ -37,16 +37,14 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow,
-        // redirect: {name:'showsLibrary'},
-        //     children: [
-        //         {
-        //             path: 'showsLibrary',
-        //             name: 'showsLibrary',
-        //             components: {
-        //                 showsLibrary: AppShow
-        //             }
-        //         }
-        //     ]
+        // beforeEnter: function(to, from, next) {
+          
+        //     let keyword = to.query.keyword
+          
+        //    this.key=keyword
+        //     console.log( this.key)
+        //   next()
+        //   }
     },
     {
         path: '/detail',
@@ -56,12 +54,7 @@ const routes = [
     {
         path: '/search',
         name: 'search',
-        component: AppSearch,
-        // beforeEnter:  (to, from ,next) => {
-        //     console.log(to.path)
-        //     // this.$emit('url',to.path);
-        // }
-
+        component: AppSearch
     },
     {
         path: '/not-found',

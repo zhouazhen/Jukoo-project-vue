@@ -5,6 +5,9 @@
        <span class="s2" v-else @click="show=!show"><i @click="handleChangeView('two')" class="fa fa-th-large"></i></span>
         
         <component :is="currentView" :n="shows"></component>
+        <router-link tag="div" :to="{path:'/show',query: {category: more.category}}" class="more">
+            {{more.title}}>
+        </router-link>
     </div>
 </template>
 <script>
@@ -32,6 +35,7 @@ export default {
             currentView:"one",
              shows : [],
              show:false,
+             more:{title:"查看全部演出",category: 0}
             
     }},
    beforeCreate(){
@@ -49,7 +53,7 @@ export default {
         }).then(function (res) {
                 
                that.shows=res.data.data
-               console.log( that.shows)
+               
             })
     }
      
@@ -75,6 +79,18 @@ export default {
         right: 0.6rem;
         font-size:0.5rem
         
+    }
+    .more{
+        height:1rem;
+        width:3.5rem;
+        line-height: 1rem;
+        text-align:center;
+        border:0.0133rem solid red;
+        position:relative;
+        left:3rem;
+        bottom:-0.3333rem;
+        margin-bottom:0.6667rem
+
     }
 }
 
