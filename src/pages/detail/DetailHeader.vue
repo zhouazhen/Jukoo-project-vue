@@ -3,14 +3,43 @@
     <div class="left">
       <a href=""><span class="fa fa-angle-left"></span></a>
     </div>
-    <div class="center">演出详情</div>
-    <div class="right"><span class="fa fa-ellipsis-h"></span></div>
+    <div class="center" v-if="tag">演出详情</div>
+    <div class="right" @click="backShow"><span class="fa fa-ellipsis-h"></span></div>
   </header>
 </template>
 
 <script>
+// import bus from '@util/bus'
 export default {
-
+  data: function() {
+    return {
+      tag: false
+    };
+  },
+  methods: {
+    backShow: function() {
+      // this.$emit('show-bg')
+      this.$store.commit("backIsShow");
+    },
+    /* top (){
+      bus.$emit('eventForm')
+    } */
+    handleScroll() {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      let headerbarOffsetTop = document.querySelector('header').offsetTop;
+      if (scrollTop > headerbarOffsetTop) {
+        this.tag = true;
+      } else {
+        this.tag = false;
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
 };
 </script>
 
@@ -52,7 +81,6 @@ export default {
     flex: 1 1;
     text-align: center;
     font-size: 0.4533rem;
-    //   display: none;
   }
 }
 </style>

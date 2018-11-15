@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import loginIn from '@pages/login/loginIn'
+import loginUp from '@pages/login/loginUp'
 import AppHome from '@pages/home/AppHome'
 import AppMine from '@pages/mine/AppMine'
 import AppShow from '@pages/show/AppShow'
@@ -21,6 +23,18 @@ const routes = [
         // redirect: '/home'
         // redirect: { path: '/home'}
         redirect: { name: 'home'}
+    },
+    {
+        path: '/loginin',
+        name: 'loginin',
+        component: loginIn,
+        // alias: '/'
+    },
+    {
+        path: '/loginup',
+        name: 'loginup',
+        component: loginUp,
+        // alias: '/'
     },
     {
         path: '/home',
