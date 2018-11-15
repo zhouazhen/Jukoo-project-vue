@@ -10,7 +10,7 @@ import '@styles/main.scss'
 // flexible 移动端适配
 import '@libs/flexible'
 //font-awesome字体图标
-import '@libs/fontawesome-free/css/all.min.css'
+// import '@libs/fontawesome-free/css/all.min.css'
 // 引入各种插件： swiper...
 import '@libs'
 //store Vuex
