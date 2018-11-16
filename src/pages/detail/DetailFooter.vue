@@ -5,13 +5,21 @@
       <span class="txt">客服</span>
       <span class="line"></span>
     </div>
-    <div class="buy-now">立即购票</div>
+    <div class="buy-now" @click="ticket()">立即购票</div>
     <div class="seat-online">在线选座</div>
   </div>
 </template>
 
 <script>
-export default {};
+import qs from 'qs'
+export default {
+    props:['info'],
+    methods: {
+    ticket(){
+      this.$router.push({ path: "ticket"});
+    }
+  }
+};
 </script>
 
 <style lang="scss">

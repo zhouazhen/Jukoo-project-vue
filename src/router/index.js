@@ -11,6 +11,8 @@ import AppShow from '@pages/show/AppShow'
 import AppDetail from '@pages/detail/AppDetail'
 import AppNotFound from '@pages/not-found/AppNotFound'
 import AppSearch from '@pages/search/AppSearch'//搜索页
+import AppTicket from '@pages/get-ticket/ticket'
+
 
 // 路由表
 const routes = [
@@ -60,6 +62,11 @@ const routes = [
             console.log(to.path)
         }
 
+    },
+    {
+        path: '/ticket',
+        name: 'ticket',
+        component: AppTicket,
     },
     {
         path: '/not-found',

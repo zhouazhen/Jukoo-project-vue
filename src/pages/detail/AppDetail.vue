@@ -74,7 +74,7 @@
       </article>
       <div class="empty"></div>
     </div>
-    <detail-footer></detail-footer>
+    <detail-footer :info = 'data'></detail-footer>
   </div>
 
 </template>
