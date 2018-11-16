@@ -1,15 +1,8 @@
 <template>
   <div id="app">
-
-    <!-- <body>
-      
-        <router-view></router-view>
-      
-      
-    </body> -->
-        <router-view></router-view>
+    <router-view></router-view>
     <app-footer v-if="show"></app-footer>
-  
+
   </div>
 </template>
 

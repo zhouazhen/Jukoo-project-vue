@@ -14,18 +14,6 @@ import bg from './bg'
 import { saveCityInStorage } from './plugins'
 Vue.use(Vuex)
 
-// const store=new Vuex.Store({
-//     modules:{
-//         chunks
-//     },
-//     plugins: [saveCityInStorage]
-
-// })
-
-
-
-
-
 const store = new Vuex.Store({
     modules:{
         chunks,
