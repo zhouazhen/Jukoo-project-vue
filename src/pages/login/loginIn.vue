@@ -1,50 +1,76 @@
 <template>
-    <div class="inview">
-        <login-header :title="title"></login-header>
-        <section class="main">
-            <div class="login-wrap">
-                <h1 class="title">欢迎来到聚橙网</h1>
-                <div class="login-area">
-                    <form>
-                        <ul class="lg-list">
-                            <li class="lg-item"><input type="text" name="user" placeholder="请输入手机号/邮箱" class="lg-input">
-                                <div class="btn remove-btn" style="display: none;"><i class="fas fa-times-circle"></i></div>
-                            </li>
-                            <li class="lg-item">
-                                <input type="password" name="pwd" placeholder="请输入密码" class="lg-input pwd-input">
-                                <input type="text" name="pwd" placeholder="请输入密码" class="lg-input pwd-input" style="display: none;">
-                                <div class="btn remove-btn" style="display: none;"><i class="fas fa-times-circle"></i></div>
-                                <div class="btn visualise-btn"><i class="fas fa-eye-slash"></i></div>
-                            </li>
-                            <li class="lg-item"><input type="number" name="code" placeholder="请输入验证码" class="lg-input code-input">
-                                <div class="btn send-btn"><i class="">发送验证码</i> <i style="display: none;">(60)重新获取</i></div>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-                <div class="login-toggle">
-                    <div class="tg-wrap tg-sms"><span class="tg-txt">验证码登录<i class="icon icon-menu-right"></i></span> <a href="https://m.juooo.com/Passport/checkPassCode"><span class="tg-txt">忘记密码</span></a></div>
-                </div>
-                <div class="login-btn"><a href="javascript:;" disabled="disabled" class="btn lg-btn">登录</a></div>
-            </div>
-        </section>
-        <div class="dialog" style="display: none;">
-            <p class="tips-text"></p>
+  <div class="inview">
+    <login-header :title="title"></login-header>
+    <section class="main">
+      <div class="login-wrap">
+        <h1 class="title">欢迎来到聚橙网</h1>
+        <div class="login-area">
+          <form>
+            <ul class="lg-list">
+              <li class="lg-item">
+                <input @input="judgeVal('userTag',$event)" type="text" name="user" :placeholder="loginmethod ? '请输入手机号/邮箱':'请输入手机号'" class="lg-input">
+                <div class="btn remove-btn" v-if="userTag"><i class="fas fa-times-circle"></i></div>
+              </li>
+              <li class="lg-item" v-if="loginmethod">
+                <input @input="judgeVal('pwdTag',$event)" type="password" name="pwd" placeholder="请输入密码" class="lg-input pwd-input">
+                <input @input="judgeVal('pwdTag',$event)" type="text" name="pwd" placeholder="请输入密码" class="lg-input pwd-input" style="display: none;">
+                <div class="btn remove-btn" v-if="pwdTag"><i class="fas fa-times-circle"></i></div>
+                <div @click="showPwd" class="btn visualise-btn"><i :class="showTag ? 'fas fa-eye' : 'fas fa-eye-slash'"></i></div>
+              </li>
+              <li class="lg-item" v-if="!loginmethod"><input type="number" name="code" placeholder="请输入验证码" class="lg-input code-input">
+                <div class="btn send-btn"><i class="">发送验证码</i> <i style="display: none;">(60)重新获取</i></div>
+              </li>
+            </ul>
+          </form>
         </div>
+        <div class="login-toggle">
+          <div v-if="loginmethod" @click="switchLoginMethod" class="tg-wrap tg-sms"><span class="tg-txt">验证码登录<i class="fa fa-angle-right"></i></span> <a href="https://m.juooo.com/Passport/checkPassCode"><span class="tg-txt">忘记密码</span></a></div>
+          <div v-if="!loginmethod" @click="switchLoginMethod" class="tg-wrap tg-pwd"><span class="tg-txt">密码登录<i class="fa fa-angle-right"></i></span></div>
+        </div>
+        <div class="login-btn"><a href="javascript:;" disabled="disabled" class="btn lg-btn">登录</a></div>
+      </div>
+    </section>
+    <div class="dialog" style="display: none;">
+      <p class="tips-text"></p>
     </div>
+  </div>
 </template>
 
 <script>
-import LoginHeader from '@pages/login/loginHeader'
+import LoginHeader from "@pages/login/loginHeader";
 export default {
-    data () {
-        return {
-            title : '注册',
-        }
+  data() {
+    return {
+      title: "注册",
+      loginmethod: true,
+      userTag: false,
+      pwdTag: false,
+      showTag : false,
+    };
+  },
+  components: {
+    LoginHeader
+  },
+  methods: {
+    //切换登录方式
+    switchLoginMethod() {
+      this.loginmethod = !this.loginmethod;
     },
-    components : {
-        LoginHeader
-    }
+    //判断input的值，是否显示删除图标
+    judgeVal(type,e) {
+      if (e.target.value) {
+        this[type] = true;
+      } else {
+        this[type] = false;
+      }
+    },
+    //显示密码
+    showPwd (e) {
+      this.showTag = !this.showTag
+      
+    },
+  },
+  watch: {}
 };
 </script>
 
@@ -116,6 +142,10 @@ export default {
         -ms-flex-pack: justify;
         justify-content: space-between;
       }
+      .tg-wrap.tg-pwd {
+        -webkit-box-pack: center;
+        justify-content: center;
+      }
       .tg-wrap {
         display: flex;
         .tg-txt {
@@ -163,5 +193,15 @@ export default {
     line-height: 0.32rem;
     color: #fff;
   }
+}
+.fas {
+  font-size: 0.4rem;
+  color: #d8d8d8;
+}
+.fa-angle-right {
+  color: #666;
+  font-size: 40px;
+  vertical-align: text-bottom;
+  margin-left: 5px;
 }
 </style>
