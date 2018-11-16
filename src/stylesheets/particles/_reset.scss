@@ -155,6 +155,8 @@ textarea {
     margin: 0;
     font: inherit;
     color: inherit;
+    border: none;
+    outline : 0;
 }
  
 * {
@@ -187,4 +189,7 @@ nav,
 section,
 summary {
     display: block;
+}
+ul,li{
+    list-style: no
 }

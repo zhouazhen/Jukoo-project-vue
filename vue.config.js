@@ -14,9 +14,17 @@ module.exports = {
           target: 'https://m.juooo.com',
           changeOrigin: true,
           pathRewrite: {
-            '^/ju': '/'
+            '^/ju': ''
            
           }
+        },
+        'bd':{target: 'https://api.map.baidu.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/bd': ''
+         
+        }
+
         }
       }
     },

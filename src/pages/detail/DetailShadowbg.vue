@@ -1,44 +1,104 @@
 <template>
-    <!-- 返回 -->
-    <div class="shadow-bg">
-        <div class="mask"></div>
-        <div class="back-wrapper">
-            <div class="triangle"></div>
-            <a href="" class="tohome">首页</a>
-            <a href="" class="myjucoo">我的聚橙</a>
-        </div>
-        <!-- //底部弹窗 -->
-        <div class="promotion-wrapper">
-            <div class="title">
-                促销
-                <span class="close">&times;</span>
-            </div>
-            <div class="promotion">
-                <div class="tip">以下促销方式可在结算时任选其一</div>
-                <div class="row">
-                    <span class="type">折扣</span>
-                    <span class="txt">【双十一特惠】重庆刘瑞琦，限时8折</span>
-                    <span class="txt-right">
-                        了解详情
-                        <i class="fa fa-angle-right"></i>
-                    </span>
-                </div>
-            </div>
-        </div>
+  <!-- 返回 -->
+  <div class="shadow-bg" v-show="flag">
+    <div class="mask" @click="hidebg" ></div>
+    <div class="back-wrapper" v-if="tag">
+      <div class="triangle"></div>
+      <router-link  class="tohome" to="/home">首页</router-link>
+      <router-link  class="myjucoo" to="/mine">我的聚橙</router-link>
     </div>
+    <!-- //底部弹窗 -->
+    <div class="promotion-wrapper" v-if="promotion">
+      <div class="title">
+        促销
+        <span class="close" @click="hidebg">&times;</span>
+      </div>
+      <div class="promotion">
+        <div class="tip">以下促销方式可在结算时任选其一</div>
+        <div class="row">
+          <span class="type">折扣</span>
+          <span class="txt">【双十一特惠】重庆刘瑞琦，限时8折</span>
+          <span class="txt-right">
+            了解详情
+            <i class="fa fa-angle-right"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="promotion-wrapper" v-if="vipCard">
+      <div class="title">
+        欢聚橙卡
+        <span class="close" @click="hidebg">&times;</span>
+      </div>
+      <div class="promotion">
+        <div class="row">
+          <span class="type">橙PLUS会员卡</span>
+          <span class="txt">每单限购6张，限999单</span>
+          <span class="txt-right">
+            了解详情
+            <i class="fa fa-angle-right"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+// import bus from "@util/bus";
+
 //等待传参，促销，欢聚橙卡，优惠券
 export default {
-    
-}
+  // props: ["flag"],
+  data: function() {
+    return {
+      // tag: false
+    };
+  },
+  /*  props: {
+    flag: Boolean
+  } 
+  props : {
+    flag : {
+      type : Boolean,
+      default : 'false'
+    }
+  } */
+  mounted() {
+    // this.getEvent()
+  },
+  methods: {
+    /* getEvent() {
+      bus.$on("eventForm", () => {
+        this.tag = !this.tag;
+        console.log(this.tag);
+        
+      })
+    } */
+    hidebg(){
+      this.$store.commit("hidebg")
+    }
+  },
+  computed: {
+    flag() {
+      return this.$store.state.flag;
+    },
+    tag() {
+      return this.$store.state.back;
+    },
+    promotion() {
+      return this.$store.state.promotion;
+    },
+    vipCard() {
+      return this.$store.state.vipCard;
+    }
+  }
+};
 </script>
 
 
 <style lang="scss">
 .shadow-bg {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -53,7 +113,6 @@ export default {
   }
   //返回界面
   .back-wrapper {
-    display: none;
     width: 3.7333rem;
     height: 2.3467rem;
     position: fixed;
@@ -84,7 +143,6 @@ export default {
   }
   //底部弹窗界面
   .promotion-wrapper {
-    display: none;
     position: fixed;
     bottom: 0;
     left: 0;

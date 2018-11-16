@@ -112,6 +112,7 @@ export default {
                 color:white;
                 padding-left:0.1067rem
             }
+     
         
     }
 </style>

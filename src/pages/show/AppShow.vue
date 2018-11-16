@@ -1,8 +1,8 @@
 <template>
     <div id="show">
         <show-header></show-header>
-        <div class="content">
-            <show-content></show-content>
+        <div class="content" >
+            <show-content keep-alive></show-content>
         </div>
       
     </div>

@@ -5,6 +5,7 @@
        <span class="s2" v-else @click="show=!show"><i @click="handleChangeView('two')" class="fa fa-th-large"></i></span>
         
         <component :is="currentView" :n="shows"></component>
+
     </div>
 </template>
 <script>
@@ -32,11 +33,35 @@ export default {
             currentView:"one",
              shows : [],
              show:false,
+          
             
     }},
-   beforeCreate(){
-        var that=this;
-        axios({
+//    beforeCreate(){
+//         var that=this;
+//         axios({
+//              method: 'post',
+//                 url: '/ju/index/hotsShowList',
+//                 headers : {
+//                     'Content-Type' : 'application/x-www-form-urlencoded'
+//                 },
+//                  data: qs.stringify({
+                
+//                    "city_id":0
+//                 }),
+//         }).then(function (res) {
+                
+//                that.shows=res.data.data
+               
+//             })
+//     }
+     
+ watch: {
+        '$store.state.chunks.city': {
+            immediate: true,
+            handler (val) {
+                if ( !val.cityId ) return false
+                let that=this
+               axios({
              method: 'post',
                 url: '/ju/index/hotsShowList',
                 headers : {
@@ -44,15 +69,17 @@ export default {
                 },
                  data: qs.stringify({
                 
-                   "city_id":0
+                   "city_id":val.cityId
                 }),
         }).then(function (res) {
                 
                that.shows=res.data.data
-               console.log( that.shows)
+               
             })
-    }
-     
+            }
+        }
+    },
+
 
 }
 
@@ -76,6 +103,7 @@ export default {
         font-size:0.5rem
         
     }
+   
 }
 
 
@@ -86,8 +114,6 @@ export default {
 
 
  
-
-
 
 
 

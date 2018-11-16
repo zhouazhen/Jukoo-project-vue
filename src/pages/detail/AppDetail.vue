@@ -2,25 +2,27 @@
   <div class="detail-wrapper">
     <detail-header></detail-header>
     <detail-shadowbg></detail-shadowbg>
+
     <div class="view">
       <article class="poster">
-        <img class="img-fg" src="http://image.juooo.com/group1/M00/02/14/rAoKNVtiwvKAarn7AAB2P6sw5rA772.jpg" alt="">
+        <img class="img-fg" :src="'http://image.juooo.com'+data.pic" alt="">
         <div class="poster-bg-shadow"></div>
         <img class="logo-i" src="https://m.juooo.com/public/basic/Home/app/app-juooo4.2/images/juooo.png" alt="">
         <a class="round-num" href="https://m.juooo.com/tour/tourshowinfo?sid=33506">11场巡演</a>
         <div class="poster-fg"></div>
       </article>
       <article class="text-desc">
-        <h3 class="title">【小橙堡】情绪管理亲子剧《我该怎么办》--天津站</h3>
-        <div class="row">时间：<span class="time">2018.11.03-2018.11.24</span></div>
+        <h3 class="title">{{data.schedular_name}}</h3>
+        <!-- <h3 class="title"></h3> -->
+        <div class="row">时间：<span class="time">{{data.activity_seckill_start_time|timeFormat}}-{{data.activity_seckill_end_time|timeFormat}}</span></div>
         <a href="" class="row venue">
           <span>场馆：</span>
-          <span class="place">天津华夏未来剧场</span>
+          <span class="place">{{data.venue_name}}</span>
           <i class="fa fa-map-marker"></i>
         </a>
         <div class="price row">
           <i class="fa fa-cny"></i>
-          <span class="num">88-298</span>
+          <span class="num">{{data.ticket_price}}</span>
         </div>
         <div class="support">
           <div class="left">
@@ -28,8 +30,8 @@
             <span class="sup-item">橙PLUS卡免邮</span>
           </div>
         </div>
-        <div class="vipcard">
-          <a href="" class="row">
+        <div class="vipcard" @click="vipcardShow">
+          <a class="row">
             <div class="left">
               欢聚橙卡：
               <span class="sup-item">橙PLUS会员卡</span>
@@ -41,23 +43,23 @@
         </div>
       </article>
       <!-- 促销 -->
-      <!-- <div class="discount">
-          <a class="row js-promotion clearfix" style="">
-            <div class="left clearfix fl">
-              <div class="fl txt3">促销：</div>
-              <div class="sup fl cleafix js-discount-activity-list">
-                <p class="sup-item fl clearfix"><span class="txt1 fl">折扣</span><span class="txt2 fl">【双十一特惠】重庆刘瑞琦，限时8折</span></p>
-              </div>
+      <div class="discount" @click="promotionShow">
+        <a class="row js-promotion clearfix" style="">
+          <div class="left clearfix fl">
+            <div class="fl txt3">促销：</div>
+            <div class="sup fl cleafix js-discount-activity-list">
+              <p class="sup-item fl clearfix"><span class="txt1 fl">折扣</span><span class="txt2 fl">【双十一特惠】重庆刘瑞琦，限时8折</span></p>
             </div>
-            <div class="right fr">
-              <i class="fa fa-ellipsis-h"></i>
-            </div>
-          </a>
-        </div> -->
+          </div>
+          <div class="right fr">
+            <i class="fa fa-ellipsis-h"></i>
+          </div>
+        </a>
+      </div>
       <article class="brief-intro">
         <h3 class="title">— 演出介绍 —</h3>
         <p class="brief-txt">出身于选秀、成名于独立——她是90后创作歌手刘瑞琦Richael</p>
-        <a href="javascript:;" class="go-detail">查看详情 <span class="fa fa-angle-down"></span></a>
+        <a href="javascript:;" class="go-detail" @click="goDetail">查看详情 <span class="fa fa-angle-down"></span></a>
       </article>
       <article class="ticket-notice">
         <h3 class="title">— 购票须知 —</h3>
@@ -84,10 +86,35 @@ import DetailFooter from "@pages/detail/DetailFooter";
 import DetailShadowbg from "@pages/detail/DetailShadowbg";
 export default {
   name: "detail",
+  data() {
+    return {
+      data: JSON.parse(localStorage.getItem("item"))
+      // flag: false
+    };
+  },
   components: {
     DetailHeader,
     DetailFooter,
     DetailShadowbg
+  },
+  filters: {
+    timeFormat: function(time) {
+      let d = new Date(Number(time) * 1000);
+      return d.getFullYear() + "." + d.getMonth() + "." + d.getDate();
+    }
+  },
+  watch: {},
+  methods: {
+    goDetail: function() {},
+    /* showbg: function() {
+      this.flag = !this.flag;
+    }, */
+    promotionShow: function() {
+      this.$store.commit("promotionIsShow");
+    },
+    vipcardShow: function() {
+      this.$store.commit("vipCardIsShow");
+    }
   }
 };
 </script>
@@ -235,8 +262,6 @@ export default {
           width: 6.9333rem;
           height: 0.6133rem;
           overflow: hidden;
-          .sup-item {
-          }
         }
         .right {
           float: right;
@@ -245,55 +270,56 @@ export default {
         }
       }
     }
-    /*  .discount {
-      margin-top: 0.2933rem;
-      padding-right: 0.2667rem;
-      font-size: 0.3467rem;
-      color: #999;
-      .row {
-        display: block;
-        width: 100%;
-        padding-top: 0.2667rem;
-        padding-bottom: 0.2rem;
-        border-bottom: 1px dashed #ccc;
-        overflow: auto;
-        .right {
-          margin-right: 0.1333rem;
-          color: #666;
+  }
+  .discount {
+    padding-left: 0.4rem;
+    margin-top: 0.2933rem;
+    padding-right: 0.2667rem;
+    font-size: 0.3467rem;
+    color: #999;
+    .row {
+      display: block;
+      width: 100%;
+      padding-top: 0.2667rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px dashed #ccc;
+      overflow: auto;
+      .right {
+        margin-right: 0.1333rem;
+        color: #666;
+      }
+      .left {
+        .sup {
+          width: 7.4667rem;
         }
-        .left {
-          .sup {
-            width: 7.4667rem;
-          }
-          .sup-item {
-            margin-bottom: 0.1733rem;
-          }
-          .sup-item:first-child {
-            width: 100%;
-          }
-          .txt1 {
-            display: inline-block;
-            padding: 0 0.0667rem;
-            height: 0.4rem;
-            font-size: 0.2667rem;
-            text-align: center;
-            line-height: 0.4rem;
-            color: #ff7919;
-            border: 1px solid #ff7919;
-            border-radius: 0.0667rem;
-            margin-right: 0.1333rem;
-            margin-top: 0.0667rem;
-          }
-          .txt2 {
-            width: 5.8rem;
-            display: block;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-          }
+        .sup-item {
+          margin-bottom: 0.1733rem;
+        }
+        .sup-item:first-child {
+          width: 100%;
+        }
+        .txt1 {
+          display: inline-block;
+          padding: 0 0.0667rem;
+          height: 0.4rem;
+          font-size: 0.2667rem;
+          text-align: center;
+          line-height: 0.4rem;
+          color: #ff7919;
+          border: 1px solid #ff7919;
+          border-radius: 0.0667rem;
+          margin-right: 0.1333rem;
+          margin-top: 0.0667rem;
+        }
+        .txt2 {
+          width: 5.8rem;
+          display: block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
-    } */
+    }
   }
   .brief-intro {
     margin: 0.2933rem 0;
@@ -355,7 +381,7 @@ export default {
   .empty {
     width: 100%;
     height: 1.3333rem;
-}
+  }
 }
 .fl {
   float: left;
