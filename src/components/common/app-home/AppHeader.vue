@@ -2,7 +2,7 @@
     <header class="app-header">
         <div class="left">
             
-            <span class="map"><i class="fa fa-map-marker"></i>全国</span>
+            <router-link tag="span" to="/city" class="map"><i class="fa fa-map-marker"></i>{{chunks.city ? chunks.city.cityName : ''}}</router-link>
         </div>
         <router-link tag="div" to="/search" class="right">
            <a class="search" href="#"><i class="fa fa-search s"></i>搜索演出,艺人或场馆</a>
@@ -13,7 +13,27 @@
        
 </template>
 <script>
-export default {};
+
+import { mapState } from 'vuex'
+import { CHANGE_CITY } from '@/store/chunks/mutations-type'
+export default {
+    beforeCreate(){
+        // 一进来就先去定位更改城市信息, 如果有保存的，就别获取去了
+        if ( localStorage.city ) {
+            this.$store.commit({
+                type: 'chunks/' + CHANGE_CITY,
+                cities: JSON.parse(localStorage.cities),
+                city: JSON.parse(localStorage.city)
+            })
+        } else {
+            this.$store.dispatch({type: 'chunks/getCurrentPosition'})
+        }     
+    },
+    computed:mapState(['chunks'])
+     
+
+    
+};
 </script>
 <style lang="scss" >
     .app-header{
@@ -72,3 +92,16 @@ export default {};
         }
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+

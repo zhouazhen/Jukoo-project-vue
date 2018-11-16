@@ -58,7 +58,7 @@ export default {
       // that.hasnum=true
 
       that.data = res.data.data.secKillInfo;
-      console.log(that.data, 111);
+     
     });
   },
   methods: {

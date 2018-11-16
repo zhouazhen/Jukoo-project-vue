@@ -6,9 +6,9 @@
              <app-nav></app-nav>
              <app-skill-show></app-skill-show>
               <app-loop-show></app-loop-show>
-               <app-hot-box></app-hot-box>
+               <app-hot-box></app-hot-box> 
 
-             
+             <img class="img1" :src="data">
           
         </main>
        <app-footer class="bottom"></app-footer>
@@ -35,6 +35,11 @@ export default {
       AppHotBox,
       appFooter
       
+    },
+    data:function(){
+        return{
+            data:"http://image.juooo.com/group1/M00/01/9B/rAoKmVvFRm2AMGGvAABKuY20b_o268.png"
+        }
     }
 }
 </script>
@@ -45,6 +50,12 @@ main{
     top:1.2162rem;
     height:15.4595rem;
     overflow:auto;
+    
+    .img1{
+       position:fixed;
+       bottom:2rem;
+       right:0.4rem;
+    }
 
 }
 .bottom{

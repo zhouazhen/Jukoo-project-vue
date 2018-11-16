@@ -4,9 +4,9 @@
             <span class="city">全国</span>
             <i class="fa fa-angle-down"></i>
         </router-link>    
-        <router-link class="center" tag = 'li' to = '/home'>
+        <router-link class="center" tag = 'li' to = '/search'>
             <i class="fa fa-search"></i>
-            <span>搜索演出，艺人或场馆</span>
+            <span>{{this.key}}</span>
         </router-link>    
         <router-link class="right" tag = 'li' to = '/home'>
             <i class="fa fa-sort-amount-desc"></i>
@@ -15,6 +15,25 @@
 </template>
 <script>
 export default {
+    data:function(){
+        return {
+            key:"艺人 演员"
+        }
+    },
+
+    watch: {
+    '$route.query': {
+        immediate: true, 
+        handler () {
+          this.key=this.$route.query.keyword
+        }
+    }
+
+  },
+
+
+
+
   
 }
 </script>

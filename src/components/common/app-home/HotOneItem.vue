@@ -33,7 +33,7 @@ export default {
     computed:{
         sub:function(){
            this.b.display_show_time=this.b.display_show_time.substring(0,10)
-            console.log(this.b.display_show_time)
+           
 
       }
  
@@ -54,7 +54,7 @@ export default {
         margin-right: 0.1333rem;
         padding: 0.2rem 0;
         .img_box1{
-            position: relative;
+           // position: relative;
             width: 3rem;
             height: 3.9067rem;
             margin-bottom: 0.1333rem;

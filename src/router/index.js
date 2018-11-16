@@ -1,10 +1,12 @@
 import Vue from 'vue'
 
 import VueRouter from 'vue-router'
-// import bus from '@util/bus'
+ import bus from '@util/bus'
 
 Vue.use(VueRouter)
 
+import loginIn from '@pages/login/loginIn'
+import loginUp from '@pages/login/loginUp'
 import AppHome from '@pages/home/AppHome'
 import AppMine from '@pages/mine/AppMine'
 import AppShow from '@pages/show/AppShow'
@@ -13,6 +15,7 @@ import AppNotFound from '@pages/not-found/AppNotFound'
 import AppSearch from '@pages/search/AppSearch'//搜索页
 import AppTicket from '@pages/get-ticket/ticket'
 
+import AppCity from '@pages/citys/AppCitys'//定位
 
 // 路由表
 const routes = [
@@ -21,6 +24,18 @@ const routes = [
         // redirect: '/home'
         // redirect: { path: '/home'}
         redirect: { name: 'home'}
+    },
+    {
+        path: '/loginin',
+        name: 'loginin',
+        component: loginIn,
+        // alias: '/'
+    },
+    {
+        path: '/loginup',
+        name: 'loginup',
+        component: loginUp,
+        // alias: '/'
     },
     {
         path: '/home',
@@ -48,6 +63,14 @@ const routes = [
         //             }
         //         }
         //     ]
+        // beforeEnter: function(to, from, next) {
+          
+        //     let keyword = to.query.keyword
+          
+        //    this.key=keyword
+        //     console.log( this.key)
+        //   next()
+        //   }
     },
     {
         path: '/detail',
@@ -57,11 +80,12 @@ const routes = [
     {
         path: '/search',
         name: 'search',
-        component: AppSearch,
-        beforeEnter:  (to, from ,next) => {
-            console.log(to.path)
-        }
-
+        component: AppSearch
+    },
+    {
+        path: '/city',
+        name: 'city',
+        component: AppCity
     },
     {
         path: '/ticket',

@@ -37,6 +37,8 @@ export default {
         width:100%;
         display:flex;
         justify-content: space-around;
+        position:absolute;
+        bottom:0;
         .app-footer_item{
             
             margin:0.2rem 0;

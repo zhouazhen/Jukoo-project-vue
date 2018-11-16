@@ -1,11 +1,11 @@
 <template>
 <div class="app-nav">
    <div class="app-nav-top">
-        <div class = "app-nav-top-item"  v-for = "item in data" :key  = "item.id ">
+        <router-link tag="div" :to="{path:'/show', query: {category: item.category} }" class = "app-nav-top-item"  v-for = "item in data" :key  = "item.id ">
         
             <img :src="item.url">
             <p><span>{{item.content}}</span></p>
-        </div>
+        </router-link>
 
    </div>
 
@@ -27,11 +27,11 @@ export default {
 data:function(){
    return {
         data:[
-            {id:1, url:"http://image.juooo.com/group1/M00/01/9B/rAoKmVvFUxWAVCq7AAA1AYjHYo4689.png" , content:"演唱会"},
-            {id:2, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUyCATRKeAAAs7TXa0as743.png" , content:"音乐会"},
-            {id:3, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUyiAJYdkAAAznnkz53A336.png" , content:"舞台剧"},
-            {id:4, url:"http://image.juooo.com/group1/M00/01/9B/rAoKmVvFUzCANA78AAAuNmAUVOY761.png" , content:"音乐剧"},
-            {id:5, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUzmASY4pAAAm76AQAHw370.png" , content:"儿童"},
+            {id:1, url:"http://image.juooo.com/group1/M00/01/9B/rAoKmVvFUxWAVCq7AAA1AYjHYo4689.png" , content:"演唱会",category: 35},
+            {id:2, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUyCATRKeAAAs7TXa0as743.png" , content:"音乐会",category: 36},
+            {id:3, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUyiAJYdkAAAznnkz53A336.png" , content:"舞台剧",category: 37},
+            {id:4, url:"http://image.juooo.com/group1/M00/01/9B/rAoKmVvFUzCANA78AAAuNmAUVOY761.png" , content:"音乐剧",category: 79},
+            {id:5, url:"http://image.juooo.com/group1/M00/02/45/rAoKNVvFUzmASY4pAAAm76AQAHw370.png" , content:"儿童",category: 38},
             
         ],
          dataBottom:[
@@ -108,7 +108,6 @@ data:function(){
 
 
 </style>
-
 
 
 
