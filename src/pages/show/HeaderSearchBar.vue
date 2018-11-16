@@ -9,7 +9,7 @@
             <span>{{this.key}}</span>
         </router-link>    
         <router-link class="right" tag = 'li' to = '/home'>
-            <i class="fa fa-sort-amount-desc"></i>
+            <i class="fas fa-sort-amount-down"></i>
         </router-link>    
     </div>
 </template>

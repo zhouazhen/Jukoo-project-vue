@@ -5,15 +5,17 @@ import {
 const getters = {
     
     [GET_FLAG]: (state) => {
-        
+        var num = []
         if(state.slot == true){
-           
-            var num = _.sortBy(state.price, function(item){
+            state.price = _.sortBy(state.price, function(item){
                 return item.price;
             });
-            return num 
-            
+        }else{
+            state.price = ''
+
         }
+        console.log(num,state.price,'ooooooo')
+        return state.price
     }
 }
 

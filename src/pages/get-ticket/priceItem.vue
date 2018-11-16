@@ -2,7 +2,7 @@
     <div class="item price-select">
         <div  class="item"  @click="changeActive(info.price)" :class = "{active: flag == true }">
             <span >
-                <i class="fa fa-yen"></i>
+                <i class="fa fa-yen-sign"></i>
                 <span>{{info.price}}</span>
             </span>
         </div>
@@ -16,8 +16,8 @@ export default {
     props:['info'],
     data() {
         return {
-            flag: false,
             datas: '',
+            flag: false,
         }
     },
     computed: {
@@ -26,10 +26,14 @@ export default {
         }),
     }, 
     watch: {
-        getFlag(val){   
-            let num = Array.from(val)    //拿到getters算好的变化后的price数组
-            this.datas = num        
-        }
+        getFlag(val){  
+            if(val){
+                let num = Array.from(val)    //拿到getters算好的变化后的price数组
+                this.datas = num 
+            }else{
+                this.flag = false
+            }   
+        },
     },
     methods: {
         ...mapMutations({

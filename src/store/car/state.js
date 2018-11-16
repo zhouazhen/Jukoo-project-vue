@@ -1,8 +1,9 @@
 const state = {
     goods : [],
-    ticket : [],
-    slot : true,
     price : [],
+    arr : [],
+    slot : false,
+    ticket : false,
 }
 
 export default state
