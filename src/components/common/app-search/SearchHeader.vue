@@ -15,7 +15,7 @@
     </header>
     <div class = "key"> 
         <p>大家都在找</p>
-        <div class="key-list">
+    <div class="key-list">
           <router-link 
           
             
@@ -23,7 +23,7 @@
            :to="{path:'/show', query: {keyword: item.key}  }"
             v-for= "item in data"
              :key="item.id"
-            
+            @click.native='test2(item)'
              >{{item.title}}
              </router-link>
         </div>
@@ -44,45 +44,57 @@ export default {
                 {id:2,title:"《猫》",key:"《猫》"},
                 {id:3,title:"魔戒",key:"魔戒"},
                 {id:4,title:"小野丽莎",key:"小野丽莎"},
-                 {id:5,title:"V.K克",key:"V.K克"},
+                {id:5,title:"V.K克",key:"V.K克"},
                 {id:6,title:"三体",key:"三体"},
                 {id:7,title:"周慧敏",key:"周慧敏"},
                 {id:8,title:"王力宏",key:"王力宏"},
-                 {id:9,title:"陈慧娴",key:"陈慧娴"},
+                {id:9,title:"陈慧娴",key:"陈慧娴"},
 
-            ]
+            ],
+            list:[]
         }
     },
 
-      beforeCreate() {
-    var that = this;
-   
-    axios({
-      method: "post",
-      url: "/ju/Search/getKeywordsList",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-      
-    }).then(function(res) {
-      
-console.log(res)
-   
-     
-    });
-  },
+//   created:function(){
+          
+//             console.log(localStorage.getItem("keyword"),3333333333333333)
+//         },
 
     methods:{
-     test:function(i){
-         // @click.native="test(item.id)"
-         console.log(i)
-          this.$bus.$emit("search",this.data[i-1].title)
-        
+       
+       
+      
+        test2:function(item){//存储搜索的关键字
+           this.list.push({
+                        id: item.id ,
+                        key: item.key,
+                    })
+          console.log(this.list)
+        },
+    },
+          watch: {
+                list: {
+                    deep: true,
+                    handler () {
+                        // 应该将新的todos存放到localstorage
+                       // localStorage.todoid = this.todoid
+                     alert(333333)
+                        localStorage.todos = JSON.stringify(this.list)
+                        
+                    }
+                }
+            },
+          
+                // removeTodoItem (id) {
+                //     this.todos = this.todos.filter(item => item.id !== id)
+                // }
+            
 
-        
-
-     }
-    }
+      
+         
+      
+      
+    
 };
 </script>
 <style lang="scss" >

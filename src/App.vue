@@ -32,7 +32,7 @@ export default {
     });
 
     this.$router.beforeEach((to, from, next) => {
-      let noFooter = ["search", "city", "detail"];
+      let noFooter = ["search", "city", "detail","show"];
       if (noFooter.indexOf(to.name) > -1) {
         this.$bus.$emit("footer-show", false);
       } else {
