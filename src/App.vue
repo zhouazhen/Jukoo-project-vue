@@ -5,15 +5,11 @@
       
         <router-view></router-view>
       
-<<<<<<< HEAD
-    
-=======
       
     </body> -->
         <router-view></router-view>
     <app-footer v-if="show"></app-footer>
   
->>>>>>> 8dab1b47bcda8a81807deecf13c4c941cc3baf7a
   </div>
 </template>
 
@@ -21,17 +17,6 @@
 <script>
 import AppFooter from "@c/layout/AppFooter";
 export default {
-<<<<<<< HEAD
-   
-    name: 'app',
-    components: {
-    },
-   
-    
-    
-}
-
-=======
   name: "app",
   components: {
     AppFooter
@@ -58,7 +43,6 @@ export default {
     });
   }
 };
->>>>>>> 8dab1b47bcda8a81807deecf13c4c941cc3baf7a
 </script>
 
 <style lang="scss">
