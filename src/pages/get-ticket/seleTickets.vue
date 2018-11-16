@@ -2,11 +2,11 @@
     <div class="sele-tickets a-footer">
         <span class="price">{{info.price}}</span>
         <div class="operate">
-            <span  @click="decrease"><i class="fa fa-minus-square-o increase"></i></span>
+            <span  @click="decrease"><i class="far fa-minus-square increase"></i></span>
             <span class="num">{{num}}</span>
-            <span @click="increase"><i class="fa fa-plus-square-o decrease"></i></span>  
+            <span @click="increase"><i class="far fa-plus-square decrease"></i></span>  
             <span class="line"></span>
-            <span @click="remove"><i class="fa fa-trash remove"></i></span>  
+            <span @click="remove"><i class="far fa-trash-alt remove"></i></span>  
         </div>
     </div> 
 </template>

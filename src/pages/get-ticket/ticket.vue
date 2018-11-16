@@ -27,11 +27,15 @@ export default {
         SpotSelect,
         SeleFooter
     },
-   
+    created() {
 
+    }
 }
 </script>
 <style lang="scss">
+.app-footer{
+    display: none;
+}
 html{
     background: #f6f6f6;
     color: #666;

@@ -20,7 +20,6 @@ export default {
     created: function(){
         
     }
-
 }
 </script>
 <style lang="scss">
