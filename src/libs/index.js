@@ -7,8 +7,10 @@ import 'swiper/dist/css/swiper.css'
 import ajax from '@util/axios'
 // bus
 import bus from '@util/bus'
+// mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
-// 将VueAwemeSwiper中的多个组件注册为全局组件
 Vue.use(VueAwesomeSwiper)
 
 
