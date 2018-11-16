@@ -1,58 +1,50 @@
-
-import {CHANGE_CITY} from './mutations-type'
+import {
+    CHANGE_CITY
+} from './mutations-type'
 import http from '@util/axios'
 import axios from 'axios'
-import qs from 'qs'
-export default{
-   async getCurrentPosition(context){
-    let city = await axios({
-        method: 'post',
-         headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded'
+export default {
+    async getCurrentPosition(context) {
+        let city = await axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-        url: '/ju/Index/getCityList'
-    })
-    console.log(city.data.city_list,666666666666666666)
-   
-       
-       let result=await http({
-        
-            url:'/bd/location/ip',
-        params:{
-                ak:'EajH3hpCLeGgNMbnPqbVl1Bm9PWGD0HO'
-            }
-               
-            
-        },true)
+            url: '/ju/Index/getCityList'
+        })
+        let result = await http({
 
-        let cityId=1;
-        let cityName='全国'
-        if(result){
-            cityName=result.data.content.address.replace('市', '')
-            for(let i=0;i<city.data.city_list.length;i++){
-                for(let j=0;j<city.data.city_list[i].lists.length;j++){
-                    if(city.data.city_list[i].lists[j].name===cityName){
-                        cityId=city.data.city_list[i].lists[j].id;
+            url: '/bd/location/ip',
+            params: {
+                ak: 'EajH3hpCLeGgNMbnPqbVl1Bm9PWGD0HO'
+            }
+        }, true)
+
+        let cityId = 1;
+        let cityName = '全国'
+        if (result) {
+            cityName = result.data.content.address.replace('市', '')
+            for (let i = 0; i < city.data.city_list.length; i++) {
+                for (let j = 0; j < city.data.city_list[i].lists.length; j++) {
+                    if (city.data.city_list[i].lists[j].name === cityName) {
+                        cityId = city.data.city_list[i].lists[j].id;
                         break;
-                    }else{
+                    } else {
                         alert(cityName)
                     }
                 }
-               
+
             }
-            console.log( cityName)
+            console.log(cityName)
         }
 
-            context.commit({
-                type:CHANGE_CITY,
-                city:{cityId,cityName},
-                cities:city.data.city_list
-            })
-        }
+        context.commit({
+            type: CHANGE_CITY,
+            city: {
+                cityId,
+                cityName
+            },
+            cities: city.data.city_list
+        })
     }
-
-
-
-
-
-  
+}
