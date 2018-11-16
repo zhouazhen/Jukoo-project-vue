@@ -34,7 +34,7 @@ export default {
 </script>
 <style lang="scss">
 .app-footer{
-    display: none;
+    // display: none;
 }
 html{
     background: #f6f6f6;
