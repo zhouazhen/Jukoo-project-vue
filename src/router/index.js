@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import VueRouter from 'vue-router'
-// import bus from '@util/bus'
+ import bus from '@util/bus'
 
 Vue.use(VueRouter)
 
@@ -15,6 +15,7 @@ import AppNotFound from '@pages/not-found/AppNotFound'
 import AllItemList from '@pages/show/AllItemList'
 import OtherItemList from '@pages/show/OtherItemList'
 import AppSearch from '@pages/search/AppSearch'//搜索页
+import AppCity from '@pages/citys/AppCitys'//定位
 
 // 路由表
 const routes = [
@@ -51,16 +52,14 @@ const routes = [
         path: '/show',
         name: 'show',
         component: AppShow,
-        // redirect: {name:'showsLibrary'},
-        //     children: [
-        //         {
-        //             path: 'showsLibrary',
-        //             name: 'showsLibrary',
-        //             components: {
-        //                 showsLibrary: AppShow
-        //             }
-        //         }
-        //     ]
+        // beforeEnter: function(to, from, next) {
+          
+        //     let keyword = to.query.keyword
+          
+        //    this.key=keyword
+        //     console.log( this.key)
+        //   next()
+        //   }
     },
     {
         path: '/detail',
@@ -70,11 +69,12 @@ const routes = [
     {
         path: '/search',
         name: 'search',
-        component: AppSearch,
-        beforeEnter:  (to, from ,next) => {
-            console.log(to.path)
-        }
-
+        component: AppSearch
+    },
+    {
+        path: '/city',
+        name: 'city',
+        component: AppCity
     },
     {
         path: '/not-found',

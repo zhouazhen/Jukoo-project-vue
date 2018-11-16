@@ -18,6 +18,7 @@ import store from './store'
 // router 路由
 import router from './router'
 
+
 // Vue.config.devtools = false
 Vue.config.productionTip = false
 
@@ -26,6 +27,7 @@ Vue.config.productionTip = false
 new Vue({
   store,
   router,// router,// 从此任何组件都可以使用到$router （路由工具） ,$route (路由属性)
+  store,
   render: h => h(App)
   // render: (createElement) => {
   //   return createElement(App)

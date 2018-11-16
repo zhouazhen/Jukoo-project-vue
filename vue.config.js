@@ -17,6 +17,14 @@ module.exports = {
             '^/ju': ''
            
           }
+        },
+        'bd':{target: 'https://api.map.baidu.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/bd': ''
+         
+        }
+
         }
       }
     },
