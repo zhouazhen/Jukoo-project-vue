@@ -1,6 +1,6 @@
 <template>
   <div class="inview">
-    <login-header :title="title"></login-header>
+    <login-header :title="title" :path="path"></login-header>
     <section class="main">
       <div class="login-wrap">
         <h1 class="title">欢迎来到聚橙网</h1>
@@ -8,27 +8,29 @@
           <form>
             <ul class="lg-list">
               <li class="lg-item">
-                <input @input="judgeVal('userTag',$event)" ref="user" type="text" name="user" :placeholder="loginmethod ? '请输入手机号/邮箱':'请输入手机号'" class="lg-input">
-                <div class="btn remove-btn" v-if="userTag" ><i @click="delVal('userTag',['user'],$event)" class="fas fa-times-circle"></i></div>
+                <input v-show="loginmethod" @input="judgeVal('userTag',$event)" ref="user" type="text" name="user" placeholder="请输入手机号/邮箱" class="lg-input">
+                <input v-show="!loginmethod" @input="judgeVal('telTag',$event)" ref="tel" type="tel" name="tel" placeholder="请输入手机号" class="lg-input" maxlength="11">
+                <div class="btn remove-btn" v-if="userTag && loginmethod"><i @click="delVal('userTag',['user'],$event)" class="fas fa-times-circle"></i></div>
+                <div class="btn remove-btn" v-if="telTag && !loginmethod"><i @click="delVal('telTag',['tel'],$event)" class="fas fa-times-circle"></i></div>
               </li>
-              <li class="lg-item" v-if="loginmethod">
-                <input v-show="!showTag" ref="pwd" @input="judgeVal('pwdTag',$event)" type="password"  placeholder="请输入密码" class="lg-input pwd-input">
-                <input v-show="showTag" ref="text" @input="judgeVal('pwdTag',$event)" type="text"  placeholder="请输入密码" class="lg-input pwd-input">
+              <li class="lg-item" v-show="loginmethod">
+                <input v-show="!showTag" ref="pwd" @input="judgeVal('pwdTag',$event)" type="password" placeholder="请输入密码" class="lg-input pwd-input">
+                <input v-show="showTag" ref="text" @input="judgeVal('pwdTag',$event)" type="text" placeholder="请输入密码" class="lg-input pwd-input">
                 <div class="btn remove-btn" v-if="pwdTag"><i @click="delVal('pwdTag',['pwd','text'],$event)" class="fas fa-times-circle"></i></div>
                 <div @click="showPwd" class="btn visualise-btn"><i :class="showTag ? 'fas fa-eye' : 'fas fa-eye-slash'"></i></div>
               </li>
-              <li class="lg-item" v-if="!loginmethod">
-                <input type="number" placeholder="请输入验证码" class="lg-input code-input">
-                <div class="btn send-btn"><i class="">发送验证码</i> <i style="display: none;">(60)重新获取</i></div>
+              <li class="lg-item" v-show="!loginmethod">
+                <input @input="judgeVal('codeTag',$event)" ref="code" type="number" placeholder="请输入验证码" class="lg-input code-input">
+                <div class="btn send-btn"><i @click="sendCode" v-show="sendTag" ref="send">发送验证码</i> <i v-show="!sendTag">({{second}})重新获取</i></div>
               </li>
             </ul>
           </form>
         </div>
         <div class="login-toggle">
-          <div v-if="loginmethod" @click="switchLoginMethod" class="tg-wrap tg-sms"><span class="tg-txt">验证码登录<i class="fa fa-angle-right"></i></span> <a href=""><span class="tg-txt">忘记密码</span></a></div>
-          <div v-if="!loginmethod" @click="switchLoginMethod" class="tg-wrap tg-pwd"><span class="tg-txt">密码登录<i class="fa fa-angle-right"></i></span></div>
+          <div v-if="loginmethod" class="tg-wrap tg-sms"><span @click="switchLoginMethod" class="tg-txt">验证码登录<i class="fa fa-angle-right"></i></span> <a href=""><span class="tg-txt">忘记密码</span></a></div>
+          <div v-if="!loginmethod" class="tg-wrap tg-pwd"><span @click="switchLoginMethod" class="tg-txt">密码登录<i class="fa fa-angle-right"></i></span></div>
         </div>
-        <div class="login-btn"><a href="javascript:;" disabled="disabled" class="btn lg-btn">登录</a></div>
+        <div class="login-btn"><a @click="loginIn" href="javascript:;" ref="lgbtn" disabled="disabled" class="btn lg-btn">登录</a></div>
       </div>
     </section>
     <div class="dialog" style="display: none;">
@@ -43,26 +45,144 @@ export default {
   data() {
     return {
       title: "注册",
+      path: "/loginup",
       loginmethod: true,
+      sendTag: true,
       userTag: false,
+      telTag: false,
       pwdTag: false,
-      showTag: false
+      showTag: false,
+      codeTag: false,
+      second: 60,
+      telres: false
     };
   },
   components: {
     LoginHeader
   },
   methods: {
+    async loginIn() {
+      let res = await this.$http(
+        {
+          url: "/ju/Passport/login",
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          data: {
+            username: this.$refs.user.value,
+            password: this.$refs.pwd.value,
+            isCard: 1,
+            isRelevance: 0,
+            regFrom: 2,
+            _k: "",
+            next: ""
+          },
+          transformRequest: [
+            function(data) {
+              let ret = "";
+              for (let it in data) {
+                ret +=
+                  encodeURIComponent(it) +
+                  "=" +
+                  encodeURIComponent(data[it]) +
+                  "&";
+              }
+              return ret;
+            }
+          ]
+        },
+        true
+      );
+      if (res.data.code === 1) {
+        this.$router.replace("/mine");
+      }
+    },
+    //发送验证码
+    async sendCode() {
+      if (!this.telres) return;
+      let res = await this.$http(
+        {
+          url: "/ju/Passport/sendsms",
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          data: {
+            mobile: this.$refs.tel.value,
+            type: 3
+          },
+          transformRequest: [
+            function(data) {
+              let ret = "";
+              for (let it in data) {
+                ret +=
+                  encodeURIComponent(it) +
+                  "=" +
+                  encodeURIComponent(data[it]) +
+                  "&";
+              }
+              return ret;
+            }
+          ]
+        },
+        true
+      );
+
+      this.sendTag = !this.sendTag;
+      let timer = setInterval(() => {
+        --this.second;
+        if (this.second <= 0) {
+          this.second = 60;
+          this.sendTag = !this.sendTag;
+          clearInterval(timer);
+        }
+      }, 1000);
+    },
     //切换登录方式
     switchLoginMethod() {
       this.loginmethod = !this.loginmethod;
+      this.judgeVal();
     },
-    //判断input的值，是否显示删除图标
+    //判断input的值，
     judgeVal(type, e) {
-      if (e.target.value) {
-        this[type] = true;
+      if (type) {
+        let val = e.target.value;
+        //是否显示删除图标
+        if (val) {
+          this[type] = true;
+        } else {
+          this[type] = false;
+        }
+        //验证手机号/邮箱
+        let userres = false;
+        if (type === "userTag") {
+          userres =
+            /^1[34578]\d{9}$/.test(val.trim()) ||
+            /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/.test(
+              val.trim()
+            );
+          // if () {
+          // }
+        } else if (type === "telTag") {
+          this.telres = /^1[34578]\d{9}$/.test(val.trim());
+          if (this.telres) {
+            this.$refs.send.setAttribute("class", "active");
+          } else {
+            this.$refs.send.removeAttribute("class");
+          }
+        } else {
+        }
+      }
+      //登录按钮可用
+      if (this.loginmethod) {
+        if (this.userTag && this.pwdTag) {
+          this.$refs.lgbtn.removeAttribute("disabled");
+        } else {
+          this.$refs.lgbtn.setAttribute("disabled", "disabled");
+        }
       } else {
-        this[type] = false;
+        if (this.telTag && this.codeTag) {
+          this.$refs.lgbtn.removeAttribute("disabled");
+        } else {
+          this.$refs.lgbtn.setAttribute("disabled", "disabled");
+        }
       }
     },
     //显示密码
@@ -75,12 +195,16 @@ export default {
       }
     },
     //删除input值
-    delVal (tag,ref,e) {
+    delVal(tag, ref, e) {
       this[tag] = false;
+      this.judgeVal();
+      if (tag === "telTag") {
+        this.telres = false;
+        this.$refs.send.removeAttribute("class");
+      }
       ref.map(item => {
-        this.$refs[item].value = ''
-      })
-      
+        this.$refs[item].value = "";
+      });
     }
   },
   watch: {}
@@ -186,6 +310,14 @@ export default {
       );
       margin-top: 0.8rem;
     }
+    .login-btn .lg-btn[disabled] {
+      background: rgba(255, 215, 140, 0.8);
+      background-image: linear-gradient(
+        135deg,
+        #ffd88c 2.6666666667rem,
+        #ffbc8c 6.6666666667rem
+      );
+    }
   }
 }
 .dialog {
@@ -216,5 +348,8 @@ export default {
   font-size: 40px;
   vertical-align: text-bottom;
   margin-left: 5px;
+}
+.active {
+  color: #ffb319;
 }
 </style>

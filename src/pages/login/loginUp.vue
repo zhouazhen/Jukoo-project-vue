@@ -1,46 +1,131 @@
 <template>
-    <div id="app" class="view">
-        <login-header title="title"></login-header>
-        <main class="main">
-            <div class="login-wrap">
-                <h1 class="title">账号注册</h1>
-                <p class="login-tip" style="display: none;">验证码已发送至手机：<i></i></p>
-                <div class="login-area">
-                    <form>
-                        <ul class="lg-list">
-                            <li class="lg-item"><input type="tel" name="tel" placeholder="请输入手机号" class="lg-input">
-                                <div class="btn remove-btn" style="display: none;"><i class="icon icon-remove"></i></div>
-                            </li>
-                        </ul>
-                        <ul class="lg-list">
-                            <li class="lg-item"><input type="text" name="code" placeholder="请输入验证码" class="lg-input">
-                                <div class="btn remove-btn" style="display: none;"><i class="icon icon-remove"></i></div>
-                            </li>
-                            <li class="lg-item"><input type="password" name="pwd" placeholder="设置6-20位密码" class="lg-input pwd-input">
-                                <div class="btn remove-btn" style="display: none;"><i class="icon icon-remove"></i></div>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-                <div class="login-btn"><a href="javascript:;" disabled="disabled" class="btn lg-btn">下一步</a></div>
-            </div>
-        </main>
-        <div class="dialog" style="display: none;">
-            <p class="tips-text"></p>
+  <div id="app" class="view">
+    <login-header :title="title" :path="path"></login-header>
+    <section class="main">
+      <div class="login-wrap">
+        <h1 class="title">账号注册</h1>
+        <p v-show="next" class="login-tip">验证码已发送至手机：<i>{{num}}</i></p>
+        <div class="login-area">
+          <form>
+            <ul v-show="!next" class="lg-list">
+              <li class="lg-item">
+                <input @input="judgeTel" ref="tel" type="telTag" name="tel" placeholder="请输入手机号" class="lg-input">
+                <div @click="delVal('telTag','telTag')" v-if="telTag" class="btn remove-btn"><i class="fas fa-times-circle"></i></div>
+              </li>
+            </ul>
+            <ul v-show="next" class="lg-list">
+              <li class="lg-item">
+                <input @input="judgeVal('codeTag',$event)" rnef="codeTag" type="text" name="code" placeholder="请输入验证码" class="lg-input">
+                <div @click="delVal('codeTag','codeTag')" v-if="codeTag" class="btn remove-btn"><i class="fas fa-times-circle"></i></div>
+              </li>
+              <li class="lg-item">
+                <input @input="judgeVal('pwdTag',$event)" ref="pwdTag" type="password" name="pwd" placeholder="设置6-20位密码" class="lg-input pwd-input">
+                <div @click="delVal('pwdTag','pwdTag')" v-if="pwdTag" class="btn remove-btn"><i class="fas fa-times-circle"></i></div>
+              </li>
+            </ul>
+          </form>
         </div>
+        <div class="login-btn"><a @click="nextStep" href="javascript:;" disabled="disabled" ref="next" class="btn lg-btn">下一步</a></div>
+      </div>
+    </section>
+    <div class="dialog" style="display: none;">
+      <p class="tips-text"></p>
     </div>
+  </div>
 </template>
 
 
 <script>
 import loginHeader from "@pages/login/loginHeader";
 export default {
-    data () {
-        return {
-            title : '登录',
-
-        }
+  data() {
+    return {
+      title: "登录",
+      path: "/loginin",
+      num: 0,
+      next: false,
+      telres: false,
+      telTag: false,
+      pwdTag: false,
+      codeTag: false,
+      loginTag: false
+    };
+  },
+  components: {
+    loginHeader
+  },
+  methods: {
+    judgeVal(type, e) {
+      let val = e.target.value;
+      if (val) {
+        this[type] = true;
+      } else {
+        this[type] = false;
+      }
+      if (this.codeTag && this.pwdTag) {
+        this.$refs.next.removeAttribute("disabled");
+      } else {
+        this.$refs.next.setAttribute("disabled", "disabled");
+      }
+    },
+    judgeTel(e) {
+      let val = e.target.value;
+      if (val) {
+        this.telTag = true;
+      } else {
+        this.telTag = false;
+      }
+      this.telres = /^1[34578]\d{9}$/.test(val.trim());
+      if (this.telres) {
+        this.num = val;
+        this.$refs.next.removeAttribute("disabled");
+      } else {
+        this.$refs.next.setAttribute("disabled", "disabled");
+      }
+    },
+    async nextStep(e) {
+      if (!this.telres || this.loginTag) return;
+      this.next = !this.next;
+      this.loginTag = true;
+      e.target.innerHTML = "注册";
+      this.$refs.next.setAttribute("disabled", "disabled");
+      let res = await this.$http(
+        {
+          url: "/ju/Passport/sendsms",
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          data: {
+            mobile: this.$refs.tel.value,
+            type: 2
+          },
+          transformRequest: [
+            function(data) {
+              let ret = "";
+              for (let it in data) {
+                ret +=
+                  encodeURIComponent(it) +
+                  "=" +
+                  encodeURIComponent(data[it]) +
+                  "&";
+              }
+              return ret;
+            }
+          ]
+        },
+        true
+      );
+    },
+    //删除input值
+    delVal(tag, ref, e) {
+      this[tag] = false;
+      /*  this.judgeVal();
+      if (tag === "telTag") {
+        this.telres = false;
+        this.$refs.send.removeAttribute("class");
+      } */
+      this.$refs[ref].value = "";
     }
+  }
 };
 </script>
 
