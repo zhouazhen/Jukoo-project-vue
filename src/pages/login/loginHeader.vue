@@ -1,9 +1,11 @@
 <template>
   <header class="header login-header">
     <div class="header-wrap">
-      <div class="header-left"><a href="javascript:;" class="fa fa-angle-left head-btn"></a></div>
+      <div class="header-left"><a @click="back" class="fa fa-angle-left head-btn"></a></div>
       <div class="header-middle"></div>
-      <div class="header-right"><a href="https://m.juooo.com/Passport/finishRegister" class="head-btn">{{title}}</a></div>
+      <div class="header-right">
+        <router-link :to="path" class="head-btn">{{title}}</router-link>
+      </div>
     </div>
   </header>
 </template>
@@ -11,7 +13,13 @@
 <script>
 export default {
   props: {
-    title: String
+    title: String,
+    path: String
+  },
+  methods: {
+    back() {
+      this.$router.go(-1);
+    }
   }
 };
 </script>
