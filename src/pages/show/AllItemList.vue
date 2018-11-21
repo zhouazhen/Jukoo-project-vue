@@ -11,6 +11,7 @@
 import ShowItems from "@c/common/app-show/show-items.vue";
 import axios from  "axios"
 import qs from 'qs';
+import scroll from '@util/scroll'
 export default {
   components: {
     ShowItems
@@ -27,7 +28,7 @@ export default {
         immediate: true, 
         handler () {
           this.shows = []; // 清空当前的数据
-          // this.hasMore = true // 重新更多
+          this.hasMore = true // 重新更多
           this.page = 1; // 重置页数
           this.getShows();
         }
@@ -55,44 +56,64 @@ beforeCreate(){
   
 },
   methods: {
+   
     async getShows() {
       // 取到路由带过来的参数
 
       let { category, keyword } = this.$route.query
-      // if ( !this.hasMore ) return false;
+      if ( !this.hasMore ) return false;
       let result = await this.$http({
         url: "/ju/Show/getShowList",
         method: "post",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
         },
-        data: {
+        data: qs.stringify({
           city_id: -1,
           category: category || 0,
           keywords: keyword || '',
           activity_id: 0,
           sort_type: 0,
-          page: 1
-        },
-        transformRequest: function(obj) {
-          var str = [];
-          for (var p in obj) {
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          }
-          // console.log(obj)  data
-          return str.join("&");
-        }
-      });
-
-      this.shows = this.shows.concat(result.list);
-    }
-    
-  }
+          page: this.page
+        }),
+        // transformRequest: function(obj) {
+        //   var str = [];
+        //   for (var p in obj) {
+        //     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        //   }
+        //   // console.log(obj)  data
+        //   return str.join("&");
+        // },
+        
+      })
+       // 判断有没有更多数据
+       console.log(result,'dddd')
+      if ( result.total - this.page*20 <= 0 ) {
+          this.hasMore = false
+      }else {
+          this.page ++ // 有更多的话，页数增加
+      }
+     
+      
+     this.shows = this.shows.concat(result.list);
+    } 
+   
+  },
+  mounted () {
+         this.scroll = scroll({
+            el: this.$refs.root,
+            handler: this.getShows.bind(this)
+        }) 
+    }  
 };
+
 </script>
 
 
 <style lang="scss">
+.all_items{
+  height: 100%;
+}
 .items_wrap {
   margin-top: 0.266667rem;
   padding-left: 0.4rem;

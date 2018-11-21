@@ -16,25 +16,19 @@ export default {
     },
     computed: {
         flag: function() {
-            return this.$store.state.car.slot     //获取选中状态
+            return this.$store.state.goods.slot     //获取选中状态
         },
        ...mapGetters({
-            getFlag: 'car/getFlag',
+            getFlag: 'goods/getFlag',
         })
     },
     methods: {
         ...mapMutations({
-            slotSelect: 'car/slotSelect',
-            updateGoods: 'car/updateGoods',
+            slotSelect: 'goods/slotSelect'
         }),
 
         changeActive() {
             this.slotSelect()      //改变选中状态
-            setTimeout(() => {
-                this.updateGoods({     //把带有选中信息的price存入goods
-                    data: this.getFlag
-                })
-            },0)
         }
     },
 }

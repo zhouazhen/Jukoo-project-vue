@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-
-
-import car from './car'
-
-
+import goods from './goods'
 import chunks from './chunks'
 
 import bg from './bg'
@@ -17,7 +13,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     modules:{
         chunks,
-        car
+        goods
     },
     plugins: [saveCityInStorage],
 

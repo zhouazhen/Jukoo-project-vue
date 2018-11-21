@@ -1,6 +1,6 @@
 <template>
     <div class="ticket">
-        <nav-bar></nav-bar>
+        <nav-bar :info="data"></nav-bar>
         <spot-select v-for="item in type" :key = 'item.id' :info = 'item'>
             <div class="title">{{item.title}}</div>
         </spot-select>
@@ -19,7 +19,8 @@ export default {
             type: [
                 {id: 1, title: '选择场次'},
                 {id: 2, title: '选择票价'},
-            ]
+            ],
+            data: '选择票价'
         }
     },
     components: {
@@ -27,15 +28,12 @@ export default {
         SpotSelect,
         SeleFooter
     },
-    created() {
-
+    mounted() {
+        document.querySelector('.app-footer').style.display = 'none'
     }
 }
 </script>
 <style lang="scss">
-.app-footer{
-    // display: none;
-}
 html{
     background: #f6f6f6;
     color: #666;

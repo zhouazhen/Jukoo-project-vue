@@ -1,10 +1,11 @@
 <template>
     <div class="SeleFooter">
-        <sele-tickets v-for = 'item in good' :key = item.price :info = 'item'></sele-tickets>
-        <sele-action></sele-action>
+        <sele-tickets v-for = 'item in data' :key = item.price :info = 'item'></sele-tickets>
+        <sele-action ></sele-action>
     </div>
 </template>
 <script>
+import { mapGetters} from 'vuex'
 import SeleTickets from './seleTickets.vue'
 import SeleAction from './seleAction.vue'
 export default {
@@ -13,9 +14,9 @@ export default {
         SeleAction
     },
     computed: {
-        good: function() {
-           return this.$store.state.car.goods
-        }
+        ...mapGetters({
+            data: 'goods/getFlag',
+        })
     },
     created: function(){
         

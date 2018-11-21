@@ -2,8 +2,7 @@ import BetterScroll from 'better-scroll'
 
 const scroll = ({
     el, // 拉动刷新的元素
-    handler,// 拉动刷新的处理函数
-    onscroll
+    handler// 拉动刷新的处理函数
 }) => {
     let scroll = new BetterScroll(el, {
         probeType: 2,
@@ -19,9 +18,6 @@ const scroll = ({
        
         scroll.finishPullUp() // 解决拉动刷新
         scroll.refresh() // 重新计算
-    })
-    scroll.on('scroll', () => {
-        onscroll(scroll.y)
     })
     return scroll
 }

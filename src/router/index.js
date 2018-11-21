@@ -14,6 +14,8 @@ import AppDetail from '@pages/detail/AppDetail'
 import AppNotFound from '@pages/not-found/AppNotFound'
 import AppSearch from '@pages/search/AppSearch'//搜索页
 import AppTicket from '@pages/get-ticket/ticket'
+import AppTicketDetail from '@pages/get-ticket/ticketDetail'
+import AppOrders from '@pages/get-ticket/myOrders'
 
 import AppCity from '@pages/citys/AppCitys'//定位
 
@@ -91,6 +93,16 @@ const routes = [
         path: '/ticket',
         name: 'ticket',
         component: AppTicket,
+    },
+    {
+        path: '/ticketDetail',
+        name: 'ticketDetail',
+        component: AppTicketDetail,
+    },
+    {
+        path: '/myOrders',
+        name: 'myOrders',
+        component: AppOrders,
     },
     {
         path: '/not-found',

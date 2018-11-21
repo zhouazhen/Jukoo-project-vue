@@ -1,6 +1,6 @@
 <template>
     <div class="item price-select">
-        <div  class="item"  @click="changeActive(info.price)" :class = "{active: flag == true }">
+        <div  class="item"  @click="changeActive(info)" :class = "{active: isShow == true }">
             <span >
                 <i class="fa fa-yen-sign"></i>
                 <span>{{info.price}}</span>
@@ -16,43 +16,44 @@ export default {
     props:['info'],
     data() {
         return {
-            datas: '',
             flag: false,
+            // isShow: false,
+            // show: ''
         }
     },
     computed: {
-        ...mapGetters({
-            getFlag: 'car/getFlag',
-        }),
-    }, 
+        isShow:function() {
+            let arr = this.$store.state.goods.tickets 
+            if(arr){
+                    console.log('val ok')
+                    Array.from(arr).forEach(item => {
+                        if(item.price == this.info.price){
+                            console.log(item.flag,'item.flag')
+                            // this.isShow = item.flag
+                            return item.flag
+                        }
+                    });
+                }else{
+                    console.log('false')
+                    return false                   //不存在，说明选择时间的按钮未选中
+                }    
+        }   
+    },
     watch: {
-        getFlag(val){  
-            if(val){
-                let num = Array.from(val)    //拿到getters算好的变化后的price数组
-                this.datas = num 
-            }else{
-                this.flag = false
-            }   
-        },
+        
     },
     methods: {
         ...mapMutations({
-            priceSelect: 'car/priceSelect',
-            updateGoods: 'car/updateGoods',
-            removeGoods: 'car/removeGoods'
+            updateTickets: 'goods/updateTickets',
+            updateGoods: 'goods/updateGoods',
+            removeTickets: 'goods/removeTickets'
         }),
       
         changeActive(info) {
             this.flag = !this.flag
-            this.data = info      //当前组建的price
-            this.priceSelect({   //把当前点击的按钮的price放到price数组
-                price: this.data
+            this.updateTickets({   //把当前点击的按钮的price放到tickets数组
+                price: this.info.price,num: 1,flag: this.flag
             })
-            setTimeout(() => {
-                this.updateGoods({     //把带有选中信息的price存入goods
-                    data: this.datas
-                })
-            },0)
         }
     }
   

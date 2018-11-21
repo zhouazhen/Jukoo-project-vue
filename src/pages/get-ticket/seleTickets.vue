@@ -1,43 +1,52 @@
 <template>
-    <div class="sele-tickets a-footer">
+    <div v-show = 'show' class="sele-tickets a-footer">
         <span class="price">{{info.price}}</span>
         <div class="operate">
-            <span  @click="decrease"><i class="far fa-minus-square increase"></i></span>
-            <span class="num">{{num}}</span>
-            <span @click="increase"><i class="far fa-plus-square decrease"></i></span>  
+            <span  @click="decrease(info)"><i class="far fa-minus-square increase"></i></span>
+            <span class="num">{{info.num}}</span>
+            <span @click="increase(info)"><i class="far fa-plus-square decrease"></i></span>  
             <span class="line"></span>
-            <span @click="remove"><i class="far fa-trash-alt remove"></i></span>  
+            <span @click="remove(info.price)"><i class="far fa-trash-alt remove"></i></span>  
         </div>
     </div> 
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
     props: ['info'],
-    data() {
-         return {
-             num: 1,
-             data: JSON.parse(localStorage.getItem("item"))
-         }
+    data(){
+        return {
+            num:1
+        }
     },
     computed: {
-        prices: function() {
-            return this.num *80
-        }
+        show: function() {
+            return this.$store.state.goods.allInfoShow
+        },
     }, 
-   
     methods:{
-        ...mapActions({
-            addGoods: 'car/addGoods'
+        ...mapMutations({
+            priceTickets: 'goods/updateTickets',
         }),
-        decrease() {
-            this.num -= 1
+        decrease(info) {
+            this.num -= 1 ,
+
+            this.priceTickets({
+                price: info.price,num: this.num,flag:true
+            })
         },
-        increase() {
-            this.num += 1
+        increase(info) {
+            this.num += 1,
+           
+            this.priceTickets({
+                price: info.price,num: this.num,flag:true
+            })
         },
-        remove() {
-            console.log('删除')
+        remove(price) {
+            
+            this.priceTickets({
+                price: price
+            })
         }
     }
 }

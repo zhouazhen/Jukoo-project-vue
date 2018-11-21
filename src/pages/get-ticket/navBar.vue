@@ -7,13 +7,20 @@
 					</a>
 				</div>
 				<div class="center">
-					选择票价
+					{{info}}
 				</div>
 				<div class="right">
 				</div>
 			</div>
 		</header>
 </template>
+<script>
+
+export default {
+   props: ['info']    
+}
+</script>
+
 <style lang="scss">
 .navbar{
     margin: 0;

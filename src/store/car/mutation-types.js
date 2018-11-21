@@ -1,6 +1,0 @@
-export const namespace = 'car/'
-export const UPDATE_CAR_GOODS =  'updateGoods'
-export const SLOT_SELECT = 'slotSelect'
-export const PRICE_SELECT = 'priceSelect'
-export const REMOVE_GOODS = 'removeGoods'
-export const GET_FLAG = 'getFlag'
