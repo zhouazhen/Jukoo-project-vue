@@ -47,10 +47,9 @@ export default {
 }
 .much{
       height:1.3333rem;
-
-
+      line-height: 1.3333rem;
+      text-align: center
     }
-
 }
 
 </style>

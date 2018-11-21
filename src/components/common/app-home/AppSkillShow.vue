@@ -1,6 +1,6 @@
 <template>
     <div class="app-skill-show">
-        <h4>显示秒杀</h4>
+        <h4>限时秒杀</h4>
         <div class="app-skill-show-swiper">
             <swiper :options="swiperOption" class="swiper">
 

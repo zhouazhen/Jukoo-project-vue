@@ -1,6 +1,6 @@
 <template>
     <section class="app-home">
-     
+     MINE 
     </section>
 </template>
 

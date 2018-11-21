@@ -68,8 +68,10 @@ export default {
             this.$store.commit({type: 'chunks/' + CHANGE_CITY, city: {
                 cityId, cityName
             }})
+             console.log( cityId,9999999999999999999999999999999)
             //回到首页
             this.$router.push({name: 'home'})
+           
         }
     }
 }

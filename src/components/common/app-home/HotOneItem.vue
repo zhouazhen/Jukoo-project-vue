@@ -10,7 +10,7 @@
             <span class="place1">
                 {{b.city_name}} 
             </span>
-            <div class="logo1">{{data}}</div>
+            <div class="logo1"><span>{{data}}</span></div>
      
             <!-- <p class="price">
                 <span class="fs0">￥</span>
@@ -118,7 +118,8 @@ export default {
                 background-color:#FA483C;
                 font-size:0.3rem;
                 color:white;
-                padding-left:0.1067rem
+                padding-left:0.1067rem;
+               
             }
         
     }

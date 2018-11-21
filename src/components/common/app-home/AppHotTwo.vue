@@ -49,7 +49,7 @@ export default {
         width:3.5rem;
         line-height: 1rem;
         text-align:center;
-        border:0.0133rem solid red;
+     
         position:relative;
         left:3rem;
         bottom:-0.3333rem;
